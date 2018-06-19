@@ -1,6 +1,5 @@
-from django.http import Http404
 from .models import Album, Song
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 def index(request):
     all_albums = Album.objects.all()
@@ -8,14 +7,7 @@ def index(request):
     return render(request, 'music/index.html',context)
 
 def view_id(request, album_id):
-    try:
-        all_songs = Song.objects.all()
-        album = Album.objects.get(id=album_id)
-    except Album.DoesNotExist:
-        raise Http404('oops that album doesn\'t exists')
-    context = {
-        'album': album,
-        'all_songs': all_songs,
-    }
+
+    album = get_object_or_404(Album, pk=album_id)
+    context = {'album': album,}
     return render(request, 'music/details.html',context)
-   #"<a href=\"../\">back to albums<a/>")

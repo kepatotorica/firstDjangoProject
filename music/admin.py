@@ -4,4 +4,5 @@ from .models import Song
 
 # Register your models here.
 
+admin.site.register(Album)
 admin.site.register(Song)

@@ -1,19 +1,14 @@
-<h1>details for an album</h1>
-{{ album }}
+<img src="{{ album.album_logo }}">
 
-<br>
-<br>
-<br>
+<h1>{{ album.album_title }}</h1>
+<h3>{{ album.artist }}</h3>
 track list:<br>
-{% with has_song=False %}{% endwith %}
-        {% for song in all_songs %}
-            {% if song.album == album %}
-                <li>{{ song }}</li>
-                {% with has_song=True %}{% endwith %}
-            {% endif %}
-        {% endfor %}
-{% if not has_song %}
-    empty
+{% if album.song_set.count > 0 %}
+    {% for song in album.song_set.all %}
+        <li>{{ song }}</li>
+    {% endfor %}
+{% else %}
+    this is an empty album
 {% endif %}
 
 <a href="../"><br><button>go back to albums</button></a>
