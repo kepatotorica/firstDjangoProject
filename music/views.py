@@ -15,5 +15,5 @@ def index(request):
 def view_id(request, album_id):
     return HttpResponse("<h2>Album id: " + str(album_id) + "</h2>")
 
-def view_albums(request):
+def view_users(request):
     return HttpResponse("nothing yet")
