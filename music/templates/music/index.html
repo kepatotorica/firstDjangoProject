@@ -1,10 +1,11 @@
 <!--{{ variables}}-->
 <!--{.% python code %} without the period, just can't run in comments-->
 
+<h1>All of your albums are listed here</h1>
 {% if all_albums %}
     <ul>
         {% for album in all_albums %}
-        <li><a href="/music/{{ album.id }}/">{{ album.album_title }}</a></li>
+            <li><a href="/music/{{ album.id }}/">{{ album.album_title }}</a></li>
         {% endfor %}
     </ul>
 {% else %}

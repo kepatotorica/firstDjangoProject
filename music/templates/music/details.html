@@ -1,0 +1,19 @@
+<h1>details for an album</h1>
+{{ album }}
+
+<br>
+<br>
+<br>
+track list:<br>
+{% with has_song=False %}{% endwith %}
+        {% for song in all_songs %}
+            {% if song.album == album %}
+                <li>{{ song }}</li>
+                {% with has_song=True %}{% endwith %}
+            {% endif %}
+        {% endfor %}
+{% if not has_song %}
+    empty
+{% endif %}
+
+<a href="../"><br><button>go back to albums</button></a>
