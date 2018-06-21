@@ -10,7 +10,7 @@
                 <!--view_id was made in music/urls.py it is used so we only have to-->
                 <!--update the path once to change everything-->
                 <!--album.id is what the regex is looking for-->
-            <li><a href="{% url 'music:view_id' album.id %}">{{ album.album_title }}</a></li>
+            <li><a href="{% url 'music:details' album.id %}">{{ album.album_title }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
