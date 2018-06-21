@@ -1,16 +1,21 @@
+{% extends 'music/base.html' %}
+{%block title%}{{album}}{%endblock%}
+{% block body %}
+
 <img src="{{ album.album_logo }}">
 
 <h1>{{ album.album_title }}</h1>
 <h3>{{ album.artist }}</h3>
 
 {% if error_message %}
-<p><strong></strong>{{error_message</p>
+<p><strong></strong>{{error_message}}</p>
 {% endif %}
 
 <form action="{% url 'music:favorite' album.id %}" method="post">
-    {% csrf_token %} <-- look into this, it is for security -->
+    <!-- look into this, it is for security -->
+    {% csrf_token %}
     {% for song in album.song_set.all %}
-    <input type="radio" id="song{{ forloop.counter}}" name="song" value="{{ song.id }}">
+    <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}">
     <label for="song{{ forloop.counter }}" >
         {{ song.song_title }}
         {% if song.is_favorite %}
@@ -21,12 +26,9 @@
     <input type="submit" value="Favorite">
 </form>
 
-<!--{% if album.song_set.count > 0 %}-->
-    <!--{% for song in album.song_set.all %}-->
-        <!--<li>{{ song }}</li>-->
-    <!--{% endfor %}-->
-<!--{% else %}-->
-    <!--this is an empty album-->
-<!--{% endif %}-->
+
+
 
 <a href="../"><br><button>go back to albums</button></a>
+
+{% endblock %}

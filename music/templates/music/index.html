@@ -1,7 +1,7 @@
-<!--{{ variables}}-->
-<!--{.% python code %} without the period, just can't run in comments-->
+{% extends 'music/base.html' %}
+{%block title%}Friendr{%endblock%}
 
-<h1>All of your albums are listed here</h1>
+{% block body %}
 {% if all_albums %}
     <ul>
         {% for album in all_albums %}
@@ -16,3 +16,4 @@
 {% else %}
     <h3>No albums listed</h3>
 {% endif %}
+{% endblock %}
