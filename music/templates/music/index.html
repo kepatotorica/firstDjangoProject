@@ -10,7 +10,24 @@
                 <!--view_id was made in music/urls.py it is used so we only have to-->
                 <!--update the path once to change everything-->
                 <!--album.id is what the regex is looking for-->
-            <li><a href="{% url 'music:details' album.id %}">{{ album.album_title }}</a></li>
+            <li><a href="{% url 'music:details' album.id %}">{{ album.album_title }}</a>
+                <form action="{% url 'music:album-delete' album.id %}" method="post" sytle="display: inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="album_id" value="{{album.id}}">
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+                <!--<div> <a href="{% url 'music:album-delete' album.id %}" style="color: rgb(100,100,100)">|    delete</a></div>-->
+                <form action="{% url 'music:album-update' album.id %}" method="post" sytle="display: inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="album_id" value="{{album.id}}">
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+                <!--<div> <a href="{% url 'music:album-update' album.id %}" style="color: rgb(100,100,100)">|    edit</a></div>-->
+            </li>
         {% endfor %}
     </ul>
 {% else %}

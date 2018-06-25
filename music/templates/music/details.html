@@ -10,7 +10,6 @@
 {% if error_message %}
 <p><strong></strong>{{error_message}}</p>
 {% endif %}
-
     {% for song in album.song_set.all %}
         {{ song.song_title }}
         {% if song.is_favorite %}
@@ -18,5 +17,7 @@
         {% endif %}
         <br>
     {% endfor %}
-
+    <a href="{% url 'music:song-add' %}">
+        <span>Add Song</span>&nbsp;
+    </a>
 {% endblock %}
