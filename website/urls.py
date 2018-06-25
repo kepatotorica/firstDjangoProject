@@ -10,6 +10,6 @@ urlpatterns = [
     re_path(r'^', include('music.urls')),
 ]
 
-if settings.DEGUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
