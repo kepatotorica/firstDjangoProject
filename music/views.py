@@ -101,3 +101,5 @@ class UserLoginView(View):
 
 
         return render(request, self.template_name,{'form': form})
+
+# class Logout(View):
