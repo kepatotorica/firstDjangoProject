@@ -13,14 +13,14 @@ class User(models.Model):
     def __str__(self):
         return self.user_title + " - " + self.name
 
-class Song(models.Model):
+class Friends(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file_type = models.CharField(max_length=10)
-    song_title = models.CharField(max_length=250)
+    friend_name = models.CharField(max_length=250)
     is_favorite = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.song_title + "." + self.file_type
+        return self.friend_name + "." + self.file_type
 
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.user.pk})

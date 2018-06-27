@@ -10,14 +10,14 @@
 {% if error_message %}
 <p><strong></strong>{{error_message}}</p>
 {% endif %}
-    {% for song in user.song_set.all %}
-        {{ song.song_title }}
-        {% if song.is_favorite %}
+    {% for friend in user.friend_set.all %}
+        {{ friend.friend_name}}
+        {% if friend.is_favorite %}
             ♥
         {% endif %}
         <br>
     {% endfor %}
-    <a href="{% url 'user:song-add' %}">
-        <span>Add Song</span>&nbsp;
+    <a href="{% url 'user:friend-add' %}">
+        <span>Add Friend</span>&nbsp;
     </a>
 {% endblock %}

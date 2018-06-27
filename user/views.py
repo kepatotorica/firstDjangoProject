@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import User as users, Song
+from .models import User as users, Friends
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -30,9 +30,9 @@ class UserDelete(DeleteView):
          model = users
          success_url = reverse_lazy('user:index')
 
-class SongCreate(CreateView):
-    model = Song
-    fields = ['user', 'file_type', 'song_title', 'is_favorite']
+class FriendCreate(CreateView):
+    model = Friends
+    fields = ['user', 'file_type', 'friend_name', 'is_favorite']
 
 class UserFormView(View):
     form_class = UserForm

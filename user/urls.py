@@ -18,5 +18,5 @@ urlpatterns = [
     re_path(r'^user/add/$', views.UserCreate.as_view(), name='user-add'),
     re_path(r'^user/(?P<pk>[0-9]+)/$', views.UserUpdate.as_view(), name='user-update'),
     re_path(r'^user/(?P<pk>[0-9]+)/delete/$', views.UserDelete.as_view(), name='user-delete'),
-    re_path(r'^user/add/song/$', views.SongCreate.as_view(), name='song-add'),
+    re_path(r'^user/add/friend/$', views.FriendCreate.as_view(), name='friend-add'),
 ]
