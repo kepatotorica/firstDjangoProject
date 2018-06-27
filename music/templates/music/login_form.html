@@ -1,5 +1,5 @@
 {%extends 'music/base.html'%}
-{%block title%}register{%endblock%}
+{%block title%}login{%endblock%}
 
 {%block body%}
 <div class="container-fluid">
@@ -13,8 +13,8 @@
                     {% include 'music/form-template.html' %}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <input type="button" class="btn btn-success" value="Switch to login" onclick="window.location.href='{% url 'music:login' %}'" />
+                            <button type="submit" class="btn btn-success" name="register">register</button>
+                            <input type="button" class="btn btn-success" value="Switch to register" onclick="window.location.href='{% url 'music:register' %}'" />
                         </div>
                     </div>
                 </form>
