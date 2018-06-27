@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .forms import UserForm, LoginForm
+from django.contrib.auth.models import User
 
 class IndexView(generic.ListView):
     template_name = 'music/index.html'
@@ -102,4 +103,8 @@ class UserLoginView(View):
 
         return render(request, self.template_name,{'form': form})
 
-# class Logout(View):
+class LogoutView(View):
+
+     def get(self, request):
+        logout(request)
+        return redirect('music:index')
