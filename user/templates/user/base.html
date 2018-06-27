@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}friender{% endblock %}</title>
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'user:index' %}">Friender</a>
+        </div>
+
+        <!--Items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active" >
+                    <a href="{% url 'user:index' %}">
+                        <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;
+                        Users
+                    </a>
+                </li>
+                <li class="" >
+                    <a href="#">
+                    <!--<a href="{% url 'user:index' %}">-->
+                        <span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;
+                        Songs
+                    </a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" folr="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="" placeholder="Search">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </form>
+             <ul class="nav navbar-nav navbar-right">
+                 <li class="" >
+                    <a href="{% url 'user:user-add' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
+                        Add User
+                    </a>
+                </li>
+                <li class="" >
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'user:logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+                        Logout
+                    </a>
+                    {% else %}
+                    <a href="{% url 'user:login' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+                        Login
+                    </a>
+                    {% endif %}
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>

@@ -8,6 +8,7 @@ app_name = admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^music/', include('music.urls')),
+    re_path(r'^', include('user.urls')),
     # re_path(r'^', include('music.urls')),
     re_path(r'^admin/logout/', admin.site.logout, name='logout')
 ]

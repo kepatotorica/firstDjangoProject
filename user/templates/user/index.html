@@ -1,0 +1,36 @@
+{% extends 'user/base.html' %}
+{%block title%}Friendr{%endblock%}
+
+{% block body %}
+{% if all_users %}
+    <ul>
+        {% for user in all_users %}
+                <!--user followed by the colon is our app name as declared in app.py-->
+                <!--and at the top of urls.py. this is adding the app to the name space-->
+                <!--view_id was made in user/urls.py it is used so we only have to-->
+                <!--update the path once to change everything-->
+                <!--user.id is what the regex is looking for-->
+            <li><a href="{% url 'user:details' user.id %}">{{ user.name }}</a>
+                <form action="{% url 'user:user-delete' user.id %}" method="post" sytle="display: inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+                <!--<div> <a href="{% url 'user:user-delete' user.id %}" style="color: rgb(100,100,100)">|    delete</a></div>-->
+                <form action="{% url 'user:user-update' user.id %}" method="post" sytle="display: inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{user.id}}">
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
+                <!--<div> <a href="{% url 'user:user-update' user.id %}" style="color: rgb(100,100,100)">|    edit</a></div>-->
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>No users listed</h3>
+{% endif %}
+{% endblock %}
