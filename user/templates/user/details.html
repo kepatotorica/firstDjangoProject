@@ -1,23 +1,22 @@
 {% extends 'user/base.html' %}
-{%block title%}{{user}}{%endblock%}
 {% block body %}
 
-<img src="{{ user.user_logo.url }}" style="width: 30vw;">
+<img src="{{ friend.friend_logo.url }}" style="width: 30vw;">
 
-<h1>{{ user.user_title }}</h1>
-<h3>{{ user }}</h3>
+<h1>{{ friend.name }}</h1>
+
 
 {% if error_message %}
 <p><strong></strong>{{error_message}}</p>
 {% endif %}
-    {% for pic in user.picture_set.all %}
-        {{ pic.picture_name}}
+    {% for pic in friend.pic_set.all %}
+        {{ pic.pic_name}}
         {% if pic.is_favorite %}
             ♥
         {% endif %}
         <br>
     {% endfor %}
     <a href="{% url 'user:pic-add' %}">
-        <span>Add Friend</span>&nbsp;
+        <span>Add Picture</span>&nbsp;
     </a>
 {% endblock %}

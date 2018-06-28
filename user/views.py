@@ -9,7 +9,7 @@ from .forms import UserForm, LoginForm
 
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
-    context_object_name = 'all_users'
+    context_object_name = 'all_friends'
 
     def get_queryset(self):
         return users.objects.all()
@@ -18,21 +18,21 @@ class DetailView(generic.DetailView):
     model = users #the template we are using
     template_name = 'user/details.html'
 
-class UserCreate(CreateView):
+class FriendCreate(CreateView):
     model = users
-    fields = ['name', 'user_title', 'user_logo']
+    fields = ['name', 'friend_title', 'friend_logo']
 
-class UserUpdate(UpdateView):
+class FriendUpdate(UpdateView):
      model = users
-     fields = ['name', 'user_title', 'user_logo']
+     fields = ['name', 'friend_title', 'friend_logo']
 
-class UserDelete(DeleteView):
+class FriendDelete(DeleteView):
          model = users
          success_url = reverse_lazy('user:index')
 
-class FriendCreate(CreateView):
+class PicCreate(CreateView):
     model = Pic
-    fields = ['user', 'file_type', 'picture_name', 'is_favorite']
+    fields = ['friend', 'file_type', 'pic_name', 'is_favorite']
 
 class UserFormView(View):
     form_class = UserForm

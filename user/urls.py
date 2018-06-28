@@ -15,8 +15,8 @@ urlpatterns = [
 
     #/music/albumID
     re_path(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='details'),
-    re_path(r'^user/add/$', views.UserCreate.as_view(), name='user-add'),
-    re_path(r'^user/(?P<pk>[0-9]+)/$', views.UserUpdate.as_view(), name='user-update'),
-    re_path(r'^user/(?P<pk>[0-9]+)/delete/$', views.UserDelete.as_view(), name='user-delete'),
-    re_path(r'^user/add/friend/$', views.FriendCreate.as_view(), name='pic-add'),
+    re_path(r'^user/add/$', views.FriendCreate.as_view(), name='user-add'),
+    re_path(r'^user/(?P<pk>[0-9]+)/$', views.FriendUpdate.as_view(), name='user-update'),
+    re_path(r'^user/(?P<pk>[0-9]+)/delete/$', views.FriendDelete.as_view(), name='user-delete'),
+    re_path(r'^user/add/friend/$', views.PicCreate.as_view(), name='pic-add'),
 ]

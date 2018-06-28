@@ -4,14 +4,14 @@ from django.urls import reverse
 # Create your models here.
 class Friend(models.Model):
     name = models.CharField(max_length=250)
-    user_title = models.CharField(max_length=500)
-    user_logo = models.FileField()
+    friend_title = models.CharField(max_length=500)
+    friend_logo = models.FileField()
 
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.user_title + " - " + self.name
+        return self.friend_title + " - " + self.name
 
 class Pic(models.Model):
     friend = models.ForeignKey(Friend, on_delete=models.CASCADE)
