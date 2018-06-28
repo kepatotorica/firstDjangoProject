@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import User as users, Friends
+from .models import Friend as users, Pic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -31,8 +31,8 @@ class UserDelete(DeleteView):
          success_url = reverse_lazy('user:index')
 
 class FriendCreate(CreateView):
-    model = Friends
-    fields = ['user', 'file_type', 'friend_name', 'is_favorite']
+    model = Pic
+    fields = ['user', 'file_type', 'picture_name', 'is_favorite']
 
 class UserFormView(View):
     form_class = UserForm
@@ -57,7 +57,7 @@ class UserFormView(View):
             user.set_password(password) #this is the only way to change a password because of hashing
             user.save()
 
-            #returns the User obejects if credintials are correct
+            #returns the Friend obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -91,7 +91,7 @@ class UserLoginView(View):
             password = form.cleaned_data['password']
             # user.set_password(password) #this is the only way to change a password because of hashing
 
-            #returns the User obejects if credintials are correct
+            #returns the Friend obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:

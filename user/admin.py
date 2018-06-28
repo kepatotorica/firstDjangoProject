@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import User
-from .models import Friends
+from .models import Friend
+from .models import Pic
 
 # Register your models here.
-admin.site.register(User)
-admin.site.register(Friends)
+admin.site.register(Friend)
+admin.site.register(Pic)

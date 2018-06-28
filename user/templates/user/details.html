@@ -10,14 +10,14 @@
 {% if error_message %}
 <p><strong></strong>{{error_message}}</p>
 {% endif %}
-    {% for friend in user.friend_set.all %}
-        {{ friend.friend_name}}
-        {% if friend.is_favorite %}
+    {% for pic in user.picture_set.all %}
+        {{ pic.picture_name}}
+        {% if pic.is_favorite %}
             ♥
         {% endif %}
         <br>
     {% endfor %}
-    <a href="{% url 'user:friend-add' %}">
+    <a href="{% url 'user:pic-add' %}">
         <span>Add Friend</span>&nbsp;
     </a>
 {% endblock %}
