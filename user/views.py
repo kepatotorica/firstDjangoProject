@@ -1,33 +1,35 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Friend as users, Pic
+from .models import Friend, Pic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .forms import UserForm, LoginForm
+from django.contrib.auth.models import User
+
 
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
     context_object_name = 'all_friends'
 
     def get_queryset(self):
-        return users.objects.all()
+        return User.objects.all()
 
 class DetailView(generic.DetailView):
-    model = users #the template we are using
+    model = Friend #the template we are using
     template_name = 'user/details.html'
 
 class FriendCreate(CreateView):
-    model = users
+    model = Friend
     fields = ['name', 'friend_title', 'friend_logo']
 
 class FriendUpdate(UpdateView):
-     model = users
+     model = Friend
      fields = ['name', 'friend_title', 'friend_logo']
 
 class FriendDelete(DeleteView):
-         model = users
+         model = Friend
          success_url = reverse_lazy('user:index')
 
 class PicCreate(CreateView):
