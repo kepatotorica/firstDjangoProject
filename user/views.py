@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Friend, Pic
+from .models import Prof, Pic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
@@ -11,25 +11,25 @@ from django.contrib.auth.models import User
 
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
-    context_object_name = 'all_friends'
+    context_object_name = 'all_users'
 
     def get_queryset(self):
         return User.objects.all()
 
 class DetailView(generic.DetailView):
-    model = Friend #the template we are using
+    model = Prof #the template we are using
     template_name = 'user/details.html'
 
 class FriendCreate(CreateView):
-    model = Friend
-    fields = ['name', 'friend_title', 'friend_logo']
+    model = Prof
+    fields = ['user', 'name', 'friend_title', 'friend_logo']
 
 class FriendUpdate(UpdateView):
-     model = Friend
+     model = Prof
      fields = ['name', 'friend_title', 'friend_logo']
 
 class FriendDelete(DeleteView):
-         model = Friend
+         model = Prof
          success_url = reverse_lazy('user:index')
 
 class PicCreate(CreateView):
@@ -59,7 +59,7 @@ class UserFormView(View):
             user.set_password(password) #this is the only way to change a password because of hashing
             user.save()
 
-            #returns the Friend obejects if credintials are correct
+            #returns the Prof obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -93,7 +93,7 @@ class UserLoginView(View):
             password = form.cleaned_data['password']
             # user.set_password(password) #this is the only way to change a password because of hashing
 
-            #returns the Friend obejects if credintials are correct
+            #returns the Prof obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:

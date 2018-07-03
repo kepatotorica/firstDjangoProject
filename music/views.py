@@ -58,7 +58,7 @@ class UserFormView(View):
             user.set_password(password) #this is the only way to change a password because of hashing
             user.save()
 
-            #returns the Friend obejects if credintials are correct
+            #returns the Prof obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:
@@ -92,7 +92,7 @@ class UserLoginView(View):
             password = form.cleaned_data['password']
             # user.set_password(password) #this is the only way to change a password because of hashing
 
-            #returns the Friend obejects if credintials are correct
+            #returns the Prof obejects if credintials are correct
             user = authenticate(username=username, password=password)
 
             if user is not None:
