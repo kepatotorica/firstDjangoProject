@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
         return User.objects.all()
 
 class DetailView(generic.DetailView):
-    model = Prof #the template we are using
+    model = User #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
     template_name = 'user/details.html'
 
 class FriendCreate(CreateView):

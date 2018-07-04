@@ -12,7 +12,7 @@ class Prof(models.Model):
     friend_logo = models.FileField()
 
     def get_absolute_url(self):
-        return reverse('user:details', kwargs={'pk': self.pk})
+        return reverse('user:details', kwargs={'pk': self.user.pk})
 
     def __str__(self):
         return self.friend_title + " - " + self.name

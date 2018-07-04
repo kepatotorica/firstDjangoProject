@@ -1,22 +1,23 @@
 {% extends 'user/base.html' %}
 {% block body %}
+asdfasdfasdfasdf<br>
+<!--<img src="{{ friend.friend_logo.url }}" style="width: 30vw;">-->
 
-<img src="{{ friend.friend_logo.url }}" style="width: 30vw;">
-
-<h1>{{ friend.name }}</h1>
-
-
-{% if error_message %}
-<p><strong></strong>{{error_message}}</p>
-{% endif %}
-    {% for pic in friend.pic_set.all %}
-        {{ pic.pic_name}}
-        {% if pic.is_favorite %}
-            ♥
-        {% endif %}
-        <br>
-    {% endfor %}
-    <a href="{% url 'user:pic-add' %}">
-        <span>Add Picture</span>&nbsp;
-    </a>
+<h1>{{ friend }}</h1>
+{{ friend.prof }}
+<!---->
+<!---->
+<!--{% if error_message %}-->
+<!--<p><strong></strong>{{error_message}}</p>-->
+<!--{% endif %}-->
+    <!--{% for pic in friend.pic_set.all %}-->
+        <!--{{ pic.pic_name}}-->
+        <!--{% if pic.is_favorite %}-->
+            <!--♥-->
+        <!--{% endif %}-->
+        <!--<br>-->
+    <!--{% endfor %}-->
+    <!--<a href="{% url 'user:pic-add' %}">-->
+        <!--<span>Add Picture</span>&nbsp;-->
+    <!--</a>-->
 {% endblock %}
