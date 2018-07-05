@@ -28,7 +28,7 @@ class FriendCreate(CreateView):
 
 class FriendUpdate(UpdateView):
      model = Prof
-     fields = ['name', 'friend_title', 'friend_logo']
+     fields = ['user', 'name', 'friend_title', 'friend_logo']
 
 class FriendDelete(DeleteView):
          model = Prof
