@@ -5,7 +5,7 @@ from .models import Prof, Pic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
-from .forms import UserForm, LoginForm
+from .forms import UserForm, LoginForm, UserUpdateForm
 from django.contrib.auth.models import User
 
 
@@ -31,9 +31,35 @@ class ProfileUpdate(UpdateView):
      fields = ['user', 'handle', 'bio', 'profile_picture']
 
 
-class PrivProfileUpdate(UpdateView):
-    model = User._meta
-    fields = ['username']
+class PrivProfileUpdate(View):
+    form_class = UserUpdateForm
+    template_name = 'user/user_form.html'
+
+    #display a blank form
+    def get(self, request, pk):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    #proces form data
+    def post(self, request, pk):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+
+            user = form.save(commit=False)
+
+            print("we are trying to save")
+            #cleaned (normalized) data
+            user.username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.set_password(password) #this is the only way to change a password because of hashing
+            user.save()
+
+        return render(request, self.template_name,{'form': form})
+
 
 
 class FriendDelete(DeleteView):

@@ -1,17 +1,9 @@
 {%extends 'user/base.html'%}
-{%block title%}Add a New Prof{%endblock%}
-{%block users_active%}active{%endblock%}
+{%block title%}register{%endblock%}
 
 {%block body%}
-
- <!--<form action="{% url 'user:priv-user-update' prof.user.id %}" method="post" sytle="display: inline">-->
-                    <!--{% csrf_token %}-->
-                    <!--<input type="hidden" name="user_id" value="{{prof.user.id}}">-->
-                    <!--<button type="submit" class="btn btn-default btn-xs">-->
-                        <!--<span class="glyphicon glyphicon-pencil"> edit your private user information </span>-->
-                    <!--</button>-->
-                <!--</form>-->
-<!--<div class="container-fluid">-->
+this is the user form
+<div class="container-fluid">
 
     <div class="col-sm-12 col-md-7">
         <div class="panel panel-default">
@@ -22,11 +14,10 @@
                     {% include 'user/form-template.html' %}
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success">save</button>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

@@ -38,8 +38,9 @@ email: {{ prof.user.email }} <br>
 handle: {{ prof.handle }} <br>
 bio: {{ prof.bio }} <br>
 profile_picture: {{ prof.profile_picture }} <br>
-<img src="{{ prof.profile_picture.url }}" style="width: 30vw;">-->
-
+{% if prof.profile_picture%}
+<img src="{{ prof.profile_picture.url }}" style="width: 30vw;">
+{% endif %}
 
 <!---->
 <!---->
