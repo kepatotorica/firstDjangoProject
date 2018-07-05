@@ -4,14 +4,14 @@
 
 {%block body%}
 
- <form action="{% url 'user:priv-user-update' prof.user.id %}" method="post" sytle="display: inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{prof.user.id}}">
-                    <button type="submit" class="btn btn-default btn-xs">
-                        <span class="glyphicon glyphicon-pencil"> edit your private user information </span>
-                    </button>
-                </form>
-<div class="container-fluid">
+ <!--<form action="{% url 'user:priv-user-update' prof.user.id %}" method="post" sytle="display: inline">-->
+                    <!--{% csrf_token %}-->
+                    <!--<input type="hidden" name="user_id" value="{{prof.user.id}}">-->
+                    <!--<button type="submit" class="btn btn-default btn-xs">-->
+                        <!--<span class="glyphicon glyphicon-pencil"> edit your private user information </span>-->
+                    <!--</button>-->
+                <!--</form>-->
+<!--<div class="container-fluid">-->
 
     <div class="col-sm-12 col-md-7">
         <div class="panel panel-default">

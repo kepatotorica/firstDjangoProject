@@ -30,6 +30,12 @@ class ProfileUpdate(UpdateView):
      model = Prof
      fields = ['user', 'handle', 'bio', 'profile_picture']
 
+
+class PrivProfileUpdate(UpdateView):
+    model = User._meta
+    fields = ['username']
+
+
 class FriendDelete(DeleteView):
          model = Prof
          success_url = reverse_lazy('user:index')

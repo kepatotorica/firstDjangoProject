@@ -11,7 +11,7 @@ class Prof(models.Model):
     bio = models.CharField(max_length=500)
     profile_picture = models.FileField()
 
-    #return str([f.handle for f in self.user._meta.get_fields()])
+    #return str([f.name for f in self.user._meta.get_fields()])
     #feilds in user include, found using the command above
     # ['prof',
     #  'logentry',
