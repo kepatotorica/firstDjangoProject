@@ -30,7 +30,7 @@ last_name: {{ prof.user.last_name }} <br>
 email: {{ prof.user.email }} <br>
 name: {{ prof.name }} <br>
 friend_title: {{ prof.friend_title }} <br>
-friend_logo: {{ prof.friend_title }} <br>
+friend_logo: {{ prof.friend_logo }} <br>
 <img src="{{ prof.friend_logo.url }}" style="width: 30vw;">-->
  <form action="{% url 'user:user-update' prof.id %}" method="post" sytle="display: inline">
                     {% csrf_token %}
