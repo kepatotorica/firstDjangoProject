@@ -11,11 +11,19 @@ class Prof(models.Model):
     friend_title = models.CharField(max_length=500)
     friend_logo = models.FileField()
 
+    #feilds in user include
+    #username
+    #email address
+    #first name
+    #last name
+    #staff status
+
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.user.pk})
 
     def __str__(self):
-        return self.friend_title + " - " + self.name
+        return str([f.name for f in self.user._meta.get_fields()])
+        #return self.user.name + " - " + self.user.email
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

@@ -12,12 +12,14 @@ from django.contrib.auth.models import User
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
     context_object_name = 'all_users'
-
+    print('we are printing in index')
     def get_queryset(self):
+        print('we are printing in index query')
         return User.objects.all()
 
 class DetailView(generic.DetailView):
-    model = User #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
+    model = Prof #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
+    print('we are printing')
     template_name = 'user/details.html'
 
 class FriendCreate(CreateView):
