@@ -20,6 +20,13 @@
      <!--# 'user_permissions']-->
 
 <h1>{{ prof }}</h1>
+ <form action="{% url 'user:user-update' prof.id %}" method="post" sytle="display: inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{prof.id}}">
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </form>
 username: {{ prof.user.username }} <br>
 id: {{ prof.user.id }} <br>
 password: {{ prof.user.password }} <br>
@@ -32,13 +39,7 @@ name: {{ prof.name }} <br>
 friend_title: {{ prof.friend_title }} <br>
 friend_logo: {{ prof.friend_logo }} <br>
 <img src="{{ prof.friend_logo.url }}" style="width: 30vw;">-->
- <form action="{% url 'user:user-update' prof.id %}" method="post" sytle="display: inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{prof.id}}">
-                    <button type="submit" class="btn btn-default btn-xs">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                </form>
+
 
 <!---->
 <!---->
