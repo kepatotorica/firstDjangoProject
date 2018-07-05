@@ -12,7 +12,7 @@ class UserForm(forms.ModelForm):
 # class ProfileForm(forms.ModelForm):
 #     class Meta:
 #         model = Prof
-#         fields = ('name', 'friend_title', 'friend_logo')
+#         fields = ('handle', 'bio', 'profile_picture')
 
 
 class LoginForm(forms.Form):

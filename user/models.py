@@ -7,11 +7,11 @@ from django.dispatch import receiver
 # Create your models here.
 class Prof(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=250)
-    friend_title = models.CharField(max_length=500)
-    friend_logo = models.FileField()
+    handle = models.CharField(max_length=250)
+    bio = models.CharField(max_length=500)
+    profile_picture = models.FileField()
 
-    #return str([f.name for f in self.user._meta.get_fields()])
+    #return str([f.handle for f in self.user._meta.get_fields()])
     #feilds in user include, found using the command above
     # ['prof',
     #  'logentry',

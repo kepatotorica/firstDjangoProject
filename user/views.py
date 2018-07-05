@@ -24,11 +24,11 @@ class DetailView(generic.DetailView):
 
 class FriendCreate(CreateView):
     model = Prof
-    fields = ['user', 'name', 'friend_title', 'friend_logo']
+    fields = ['user', 'handle', 'bio', 'profile_picture']
 
-class FriendUpdate(UpdateView):
+class ProfileUpdate(UpdateView):
      model = Prof
-     fields = ['user', 'name', 'friend_title', 'friend_logo']
+     fields = ['user', 'handle', 'bio', 'profile_picture']
 
 class FriendDelete(DeleteView):
          model = Prof

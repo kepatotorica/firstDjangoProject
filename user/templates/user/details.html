@@ -1,6 +1,6 @@
 {% extends 'user/base.html' %}
 {% block body %}
-<!--<img src="{{ friend.friend_logo.url }}" style="width: 30vw;">-->
+<!--<img src="{{ friend.profile_picture.url }}" style="width: 30vw;">-->
 
 
     <!--# ['prof',-->
@@ -35,10 +35,10 @@ is_superuser: {{ prof.user.is_superuser }} <br>
 first_name: {{ prof.user.first_name }} <br>
 last_name: {{ prof.user.last_name }} <br>
 email: {{ prof.user.email }} <br>
-name: {{ prof.name }} <br>
-friend_title: {{ prof.friend_title }} <br>
-friend_logo: {{ prof.friend_logo }} <br>
-<img src="{{ prof.friend_logo.url }}" style="width: 30vw;">-->
+handle: {{ prof.handle }} <br>
+bio: {{ prof.bio }} <br>
+profile_picture: {{ prof.profile_picture }} <br>
+<img src="{{ prof.profile_picture.url }}" style="width: 30vw;">-->
 
 
 <!---->
