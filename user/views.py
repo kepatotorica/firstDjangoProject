@@ -43,24 +43,22 @@ class PrivProfileUpdate(View):
     #proces form data
     def post(self, request, pk):
         form = self.form_class(request.POST)
-
+        user = User.objects.get(pk=pk)
         if form.is_valid():
 
-            user = form.save(commit=False)
+            user = form.save(commit=True)
 
             print("we are trying to save")
             #cleaned (normalized) data
-            user.username = form.cleaned_data['username']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.email = form.cleaned_data['email']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
             user.set_password(password) #this is the only way to change a password because of hashing
             user.save()
 
         return render(request, self.template_name,{'form': form})
-
-
 
 class FriendDelete(DeleteView):
          model = Prof
