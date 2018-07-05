@@ -11,19 +11,30 @@ class Prof(models.Model):
     friend_title = models.CharField(max_length=500)
     friend_logo = models.FileField()
 
-    #feilds in user include
-    #username
-    #email address
-    #first name
-    #last name
-    #staff status
+    #return str([f.name for f in self.user._meta.get_fields()])
+    #feilds in user include, found using the command above
+    # ['prof',
+    #  'logentry',
+    #  'id',
+    #  'password',
+    #  'last_login',
+    #  'is_superuser',
+    #  'username',
+    #  'first_name',
+    #  'last_name',
+    #  'email',
+    #  'is_staff',
+    #  'is_active',
+    #  'date_joined',
+    #  'groups',
+     # 'user_permissions']
 
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.user.pk})
 
     def __str__(self):
-        return str([f.name for f in self.user._meta.get_fields()])
-        #return self.user.name + " - " + self.user.email
+        return "username: " + self.user.username + " email :"\
+               + self.user.email
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

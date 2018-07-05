@@ -3,9 +3,33 @@
 asdfasdfasdfasdf<br>
 <!--<img src="{{ friend.friend_logo.url }}" style="width: 30vw;">-->
 
+
+    <!--# ['prof',-->
+    <!--#  'logentry',-->
+    <!--#  'id',-->
+    <!--#  'password',-->
+    <!--#  'last_login',-->
+    <!--#  'is_superuser',-->
+    <!--#  'username',-->
+    <!--#  'first_name',-->
+    <!--#  'last_name',-->
+    <!--#  'email',-->
+    <!--#  'is_staff',-->
+    <!--#  'is_active',-->
+    <!--#  'date_joined',-->
+    <!--#  'groups',-->
+     <!--# 'user_permissions']-->
+
 <h1>{{ prof }}</h1>
-{{ prof.name }}
-{{ prof.email }}
+username: {{ prof.user.username }} <br>
+id: {{ prof.user.id }} <br>
+password: {{ prof.user.password }} <br>
+last_login: {{ prof.user.last_login }} <br>
+is_superuser: {{ prof.user.is_superuser }} <br>
+first_name: {{ prof.user.first_name }} <br>
+last_name: {{ prof.user.last_name }} <br>
+email: {{ prof.user.email }} <br>
+friend_title: {{ prof.friend_title }} <br>
 <!---->
 <!---->
 <!--{% if error_message %}-->
