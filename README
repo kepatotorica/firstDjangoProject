@@ -1,0 +1,41 @@
+To get this project running after downloading it follow these steps:
+
+if you get stuck during installation this site has great instructions:
+    https://djangobook.com/installing-django/
+
+1: Install python version 3.6.5: https://www.python.org/downloads/
+
+2: Install a python virtual environment in the root of the project: https://docs.python.org/3.6/library/venv.html#module-venv
+    i.python3 -m venv /path/to/firstDjangoWebsite
+
+3: Install django version 2.0.6:
+    i. pip install Django==2.0.6
+
+4: From the root of the project (in the firstDjangoWebsite folder)
+    i.    delete db.sqlite3
+    ii.   delete everything in the folder firstDjangoWebsite/user/migrations except for __init__.py
+    iii.  int the console from the root directory type in the following
+            a. python manage.py makemigrations user
+            b. python manage.py migrate
+            c. python manage.py createsuperuser
+                i. for this fill in what ever you want. It will give you access to the admin side of the site
+                   reachable now by typing localhost:8000/admin note that the 8000 after localhost may change
+                   depending on how you set everything up, but when you run the project the number will be shown
+                   in the console.
+            d. python manage.py runserver
+                i. in the console you will see: "Starting development server at http://127.0.0.1:XXXX/"
+                   the url shown will go in the address bar of your chosen web browser to access your website.
+                   The ip address can be replaced with localhost. eg. localhost:XXXX.
+    iiii. Type in the localhost:(your_port_numbr) to access the site in your browser of choice
+
+
+
+Things that we need to do, feel free to add to this:
+    -Photo uploading
+        -privacy managment of each photo
+        -a browse view that will show all photos you have the ability to see
+    -Implementation of sessions
+    -user privacy settings
+    -ability to have a friend
+        -use relational mapping
+            -this will be difficult given the way django handles forms.
