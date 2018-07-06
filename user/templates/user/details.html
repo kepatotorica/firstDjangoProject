@@ -27,34 +27,36 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </form>
-username: {{ prof.user.username }} <br>
-id: {{ prof.user.id }} <br>
-password: {{ prof.user.password }} <br>
-last_login: {{ prof.user.last_login }} <br>
-is_superuser: {{ prof.user.is_superuser }} <br>
-first_name: {{ prof.user.first_name }} <br>
-last_name: {{ prof.user.last_name }} <br>
-email: {{ prof.user.email }} <br>
-handle: {{ prof.handle }} <br>
-bio: {{ prof.bio }} <br>
-profile_picture: {{ prof.profile_picture }} <br>
+       username:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.username }} <br>
+             id:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.id }} <br>
+       password:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.password }} <br>
+     last_login:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.last_login }} <br>
+   is_superuser:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.is_superuser }} <br>
+     first_name:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.first_name }} <br>
+      last_name:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.last_name }} <br>
+          email:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.user.email }} <br>
+         handle:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.handle }} <br>
+            bio:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.bio }} <br>
+profile_picture:<br>&nbsp&nbsp&nbsp&nbsp {{ prof.profile_picture }} <br>
 {% if prof.profile_picture%}
 <img src="{{ prof.profile_picture.url }}" style="width: 30vw;">
 {% endif %}
 
-<!---->
-<!---->
-<!--{% if error_message %}-->
-<!--<p><strong></strong>{{error_message}}</p>-->
-<!--{% endif %}-->
-    <!--{% for pic in friend.pic_set.all %}-->
-        <!--{{ pic.pic_name}}-->
-        <!--{% if pic.is_favorite %}-->
-            <!--♥-->
-        <!--{% endif %}-->
-        <!--<br>-->
-    <!--{% endfor %}-->
-    <!--<a href="{% url 'user:pic-add' %}">-->
-        <!--<span>Add Picture</span>&nbsp;-->
-    <!--</a>-->
+
+<br>
+<!--TODO: add picture uploading here-->
+
+{% if error_message %}
+<p><strong></strong>{{error_message}}</p>
+{% endif %}
+    {% for pic in prof.pic_set.all %}
+        {{ pic.pic_name}}
+        {% if pic.is_favorite %}
+            ♥
+        {% endif %}
+        <br>
+    {% endfor %}
+    <a href="{% url 'user:pic-add' %}">
+        <span>Add Picture</span>&nbsp;
+    </a>
 {% endblock %}

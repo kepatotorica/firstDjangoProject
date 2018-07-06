@@ -12,11 +12,11 @@ if you get stuck during installation this site has great instructions:
     i. pip install Django==2.0.6
 
 4: From the root of the project (in the firstDjangoWebsite folder)
+    (short-cut to step 4) in console paste:
+         rm db.sqlite3; find user/migrations/ -type f -not -name '__init__.py' -print0 | xargs -0 rm --; python manage.py makemigrations user; python manage.py migrate; python manage.py createsuperuser; python manage.py runserver
     i.    delete db.sqlite3
     ii.   delete everything in the folder firstDjangoWebsite/user/migrations except for __init__.py
     iii.  int the console from the root directory type in the following
-    (short-cut to step 4) in console paste:
-         python manage.py makemigrations user; python manage.py migrate; python manage.py createsuperuser; python manage.py runserver
             a. python manage.py makemigrations user
             b. python manage.py migrate
             c. python manage.py createsuperuser

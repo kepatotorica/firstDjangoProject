@@ -46,13 +46,14 @@ class Prof(models.Model):
         instance.prof.save()
 
 class Pic(models.Model):
-    friend = models.ForeignKey(Prof, on_delete=models.CASCADE)
+    prof = models.ForeignKey(Prof, on_delete=models.CASCADE)
     file_type = models.CharField(max_length=10)
     pic_name = models.CharField(max_length=250)
     is_favorite = models.BooleanField(default=False)
+    profile_picture = models.FileField()
 
     def __str__(self):
         return self.pic_name + "." + self.file_type
 
     def get_absolute_url(self):
-        return reverse('user:details', kwargs={'pk': self.friend.pk})
+        return reverse('user:details', kwargs={'pk': self.prof.pk})

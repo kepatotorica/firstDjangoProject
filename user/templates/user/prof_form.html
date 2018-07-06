@@ -3,7 +3,7 @@
 {%block users_active%}active{%endblock%}
 
 {%block body%}
-
+proc_form
  <form action="{% url 'user:priv-user-update' prof.user.id %}" method="post" sytle="display: inline">
                     {% csrf_token %}
                     <input type="hidden" name="user_id" value="{{prof.user.id}}">
