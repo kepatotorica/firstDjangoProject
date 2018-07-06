@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -24,41 +25,24 @@ class DetailView(generic.DetailView):
 
 class FriendCreate(CreateView):
     model = Prof
-    fields = ['user', 'handle', 'bio', 'profile_picture']
+    fields = ['handle', 'bio', 'profile_picture']
 
 class ProfileUpdate(UpdateView):
      model = Prof
-     fields = ['user', 'handle', 'bio', 'profile_picture']
+     fields = ['handle', 'bio', 'profile_picture']
 
 
-class PrivProfileUpdate(View):
+class PrivProfileUpdate(UpdateView):
+    model = User
     form_class = UserUpdateForm
     template_name = 'user/user_form.html'
 
-    #display a blank form
-    def get(self, request, pk):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    #proces form data
-    def post(self, request, pk):
-        form = self.form_class(request.POST)
-        user = User.objects.get(pk=pk)
-        if form.is_valid():
-
-            user = form.save(commit=True)
-
-            print("we are trying to save")
-            #cleaned (normalized) data
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            user.set_password(password) #this is the only way to change a password because of hashing
-            user.save()
-
-        return render(request, self.template_name,{'form': form})
+    def form_valid(self, form):
+        user = form.save(commit=True)
+        password = form.cleaned_data['password']
+        user.set_password(password)
+        user.save()
+        return redirect('user:index')
 
 class FriendDelete(DeleteView):
          model = Prof
