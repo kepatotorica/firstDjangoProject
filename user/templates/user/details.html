@@ -24,7 +24,7 @@
                     <button type="submit" class="btn btn-default btn-xs">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                </form>
+ </form>
 
     <div class="form-group">
         {% if prof.profile_picture%}
@@ -60,67 +60,88 @@
 
 
 
-<meta charset="UTF-8">
-<title>Example of Bootstrap 3 Carousel</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<style type="text/css">
-</style>
-</head>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-<!-- Indicators -->
-<ol class="carousel-indicators">
-    {% for pic in prof.pic_set.all %}
-        {% if not pic.pic_publicity %}
 
-        {% else %}
-            {% if forloop.counter == 1 %}
-                <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
-            {% else %}
-                <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"></li>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-</ol>
 
-<!-- Wrapper for slides -->
-<div class="carousel-inner" role="listbox">
-    {% with first=1 %}{% endwith %}
-    <!--figure something out with this later-->
-    {% for pic in prof.pic_set.all %}
-        {% if not pic.pic_publicity %}
-        {% else %}
-        {% if forloop.counter == 1 %}
-                <div class="item active">
-            {% else %}
-                <div class="item">
-            {% endif %}
-            <img src="{{ pic.picture.url }}" alt="Image" style="width:50%; display: block; margin-left: auto; margin-right: auto;">
-            <div class="carousel-caption">
-                <h3>{{ pic.pic_name }}</h3>
+
+
+
+<!-- Trigger the modal with a button -->
+<span><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">View Pictures</button></span>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">pictures for {{ prof.handle }}</h4>
+      </div>
+
+      <div class="modal-body">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for pic in prof.pic_set.all %}
+                    {% if not pic.pic_publicity %}
+
+                    {% else %}
+                        {% if forloop.counter == 1 %}
+                            <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+                        {% else %}
+                            <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {% with first=1 %}{% endwith %}
+                <!--figure something out with this later-->
+                {% for pic in prof.pic_set.all %}
+                    {% if not pic.pic_publicity %}
+                    {% else %}
+                    {% if forloop.counter == 1 %}
+                            <div class="item active">
+                        {% else %}
+                            <div class="item">
+                        {% endif %}
+                        <div class="carousel-caption">
+                            <h3>{{ pic.pic_name }}</h3>
+                        </div>
+                        <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+
+                        {% if forloop.counter == 1 %}
+                            </div>
+                        {% else %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
             </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        {% endif %}
-    {% endfor %}
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-</div>
-<!--^^not needed, but gets rid of the red, even though this is technically wrong now-->
+
 {% endblock %}
-
-@register.simple_tag
-def update_variable(value):
-    """Allows to update existing variable in template"""
-    return value
