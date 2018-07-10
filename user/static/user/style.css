@@ -9,3 +9,10 @@ body{
 .navbar-brand{
     font-family: 'Dancing Script', cursive;
 }
+
+
+.modelButton{
+    position:absolute;
+    bottom:1vw;
+    right:1vw;
+}
