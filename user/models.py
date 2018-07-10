@@ -47,10 +47,10 @@ class Prof(models.Model):
 
 class Pic(models.Model):
     prof = models.ForeignKey(Prof, on_delete=models.CASCADE)
-    file_type = models.CharField(max_length=10)
+    pic_desc = models.CharField(max_length=10)
     pic_name = models.CharField(max_length=250)
-    is_favorite = models.BooleanField(default=False)
-    profile_picture = models.FileField()
+    pic_publicity = models.BooleanField(default=False)
+    picture = models.FileField()
 
     def __str__(self):
         return self.pic_name + "." + self.file_type

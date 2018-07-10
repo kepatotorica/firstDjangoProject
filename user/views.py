@@ -23,9 +23,9 @@ class DetailView(generic.DetailView):
     print('we are printing')
     template_name = 'user/details.html'
 
-class FriendCreate(CreateView):
-    model = Prof
-    fields = ['handle', 'bio', 'profile_picture']
+class PicCreate(CreateView):
+    model = Pic #TODO force the upload to go to the logged in user
+    fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
 
 class ProfileUpdate(UpdateView):
      model = Prof
@@ -47,10 +47,6 @@ class PrivProfileUpdate(UpdateView):
 class FriendDelete(DeleteView):
          model = Prof
          success_url = reverse_lazy('user:index')
-
-class PicCreate(CreateView):
-    model = Pic
-    fields = ['friend', 'file_type', 'pic_name', 'is_favorite']
 
 class UserFormView(View):
     form_class = UserForm
