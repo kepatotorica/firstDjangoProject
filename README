@@ -3,14 +3,26 @@ To get this project running after downloading it follow these steps:
 if you get stuck during installation this site has great instructions:
     https://djangobook.com/installing-django/
 
+==========INITIAL SETUP============
 1: Install python version 3.6.5: https://www.python.org/downloads/
 
-2: Install a python virtual environment in the root of the project, then also add the projects requirements: https://docs.python.org/3.6/library/venv.html#module-venv
-    i.  python3 -m venv /path/to/firstDjangoWebsite
-    ii. pip install -r requirements.txt
+if you just want to copy paste from this point type the following:
+    ---word of warning, you will need to press enter several times, without prompting
+       if it appears nothing is happeneing just press enter for the first thing you
+       copy paste
 
-3: Install django version 2.0.6:
-    i. pip install Django==2.0.6
+    1. python -m venv venv; source venv/Scripts/activate; pip install -r requirements.txt
+    
+    ---be careful when choosing the credintials for the admin, it will be used for your access
+       to the admin section of the website
+
+    2. rm db.sqlite3; find user/migrations/ -type f -not -name '__init__.py' -print0 | xargs -0 rm --; python manage.py makemigrations user; python manage.py migrate; python manage.py createsuperuser; python manage.py runserver
+
+
+2: Install a python virtual environment in the root of the project, then also add the projects requirements: https://docs.python.org/3.6/library/venv.html#module-venv
+    i.   python -m venv venv
+    ii.  source venv/Scripts/activate (start your virtual enviromnet. Do this anytime you want to run this project)
+    iii. pip install -r requirements.txt (press enter whenever the download gets to 100%)
 
 4: From the root of the project (in the firstDjangoWebsite folder)
     (short-cut to step 4) in console paste:
@@ -31,14 +43,21 @@ if you get stuck during installation this site has great instructions:
                    The ip address can be replaced with localhost. eg. localhost:XXXX.
     iiii. Type in the localhost:(your_port_numbr) to access the site in your browser of choice
 
+=======FOR FUTURE WORK=======
+1. cd to root folder of the project
+2. git pull; source venv/Scripts/activate; pip install -r requirements.txt
+3. do any work that you need to do
+    i. if you change the database
+        a. python manage.py makemigrations (name_of_changed_app)
+        b. python manage.py migrate
+4. test it: python manage.py runserver
+5. if you are done working: 
+    i.    pip freeze > requirements.txt
+    ii.   deactivate
+    iii.  git commit -am "changes"
+    iiii. git push
 
-
-
-If you add any packages then start your virtualenvironment
-    source path/to/activate  (can be found typing find . -name activate in a git bash)
-    pip freeze > requirements.txt
-
-
+=========TODO=========
 Things that we need to do, feel free to add to this:
     -Photo uploading
         -privacy managment of each photo
