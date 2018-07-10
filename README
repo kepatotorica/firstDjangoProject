@@ -43,7 +43,7 @@ if you just want to copy paste from this point type the following:
                    The ip address can be replaced with localhost. eg. localhost:XXXX.
     iiii. Type in the localhost:(your_port_numbr) to access the site in your browser of choice
 
-=======FOR FUTURE WORK=======
+=======EVERYTIME YOU DO WORK=======
 1. cd to root folder of the project
 2. git pull; source venv/Scripts/activate; pip install -r requirements.txt
 3. do any work that you need to do
@@ -59,7 +59,7 @@ if you just want to copy paste from this point type the following:
 
 =========TODO=========
 Things that we need to do, feel free to add to this:
-    -Photo uploading
+    -Photo uploading, in the social media sense
         -privacy managment of each photo
         -a browse view that will show all photos you have the ability to see
     -Implementation of sessions
