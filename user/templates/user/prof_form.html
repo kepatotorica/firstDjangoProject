@@ -4,15 +4,6 @@
 
 {%block body%}
 proc_form
- <form action="{% url 'user:priv-user-update' prof.user.id %}" method="post" sytle="display: inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{prof.user.id}}">
-                    <button type="submit" class="btn btn-default btn-xs">
-                        <span class="glyphicon glyphicon-pencil"> edit your private user information </span>
-                    </button>
-                </form>
-<div class="container-fluid">
-
     <div class="col-sm-12 col-md-7">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -23,6 +14,7 @@ proc_form
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
+                            <input type="button" class="btn btn-success" value="Edit more" onclick="window.location.href='{% url 'user:priv-user-update' prof.user.id %}'" />
                         </div>
                     </div>
                 </form>

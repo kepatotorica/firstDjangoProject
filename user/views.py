@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .forms import UserForm, LoginForm, UserUpdateForm
 from django.contrib.auth.models import User
-
+from django import forms
 
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
@@ -28,8 +28,14 @@ class PicCreate(CreateView):
     fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
 
 class ProfileUpdate(UpdateView):
-     model = Prof
-     fields = ['handle', 'bio', 'profile_picture']
+    model = Prof
+    fields = ['handle', 'bio', 'profile_picture']
+
+    def get_form(self, form_class=None):
+        form = super(ProfileUpdate, self).get_form(form_class)
+        form.fields['bio'].required = False
+        form.fields['bio'].initial = 'hey'
+        return form
 
 
 class PrivProfileUpdate(UpdateView):
