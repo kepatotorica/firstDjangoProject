@@ -16,3 +16,11 @@ body{
     bottom:1vw;
     right:1vw;
 }
+
+.profilePicHome{
+    display: inline-block;
+    position:relative;
+    top:0vw;
+    left:30vw;
+    width: 30vw;
+}
