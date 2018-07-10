@@ -87,16 +87,17 @@
 
 <!-- Wrapper for slides -->
 <div class="carousel-inner" role="listbox">
+    {% with first=1 %}{% endwith %}
+    <!--figure something out with this later-->
     {% for pic in prof.pic_set.all %}
         {% if not pic.pic_publicity %}
-
         {% else %}
         {% if forloop.counter == 1 %}
                 <div class="item active">
             {% else %}
                 <div class="item">
             {% endif %}
-            <img src="{{ pic.picture.url }}" alt="Image" width="460" height="345">
+            <img src="{{ pic.picture.url }}" alt="Image" style="width:50%; display: block; margin-left: auto; margin-right: auto;">
             <div class="carousel-caption">
                 <h3>{{ pic.pic_name }}</h3>
             </div>
@@ -118,3 +119,8 @@
 </div>
 <!--^^not needed, but gets rid of the red, even though this is technically wrong now-->
 {% endblock %}
+
+@register.simple_tag
+def update_variable(value):
+    """Allows to update existing variable in template"""
+    return value
