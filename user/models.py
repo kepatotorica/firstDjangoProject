@@ -33,7 +33,7 @@ class Prof(models.Model):
         return reverse('user:details', kwargs={'pk': self.user.pk})
 
     def __str__(self):
-        return "username: " + self.user.username + " email :"\
+        return "username: " + self.user.username + " email: "\
                + self.user.email
 
     @receiver(post_save, sender=User)
