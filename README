@@ -48,3 +48,8 @@ Things that we need to do, feel free to add to this:
     -ability to have a friend
         -use relational mapping
             -this will be difficult given the way django handles forms.
+            
+            
+=====TROUBLE SHOOTING=====
+if you have any database errors text the shortcut from above to solve them, here it is again if you missed it:
+    rm db.sqlite3; find user/migrations/ -type f -not -name '__init__.py' -print0 | xargs -0 rm --; python manage.py makemigrations user; python manage.py migrate; python manage.py createsuperuser; python manage.py runserver
