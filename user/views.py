@@ -20,6 +20,19 @@ class DetailView(generic.DetailView):
     model = Prof #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
     template_name = 'user/details.html'
 
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            print("\n==================")
+            print(self.object)
+            prof = Prof.objects.get(id=self.kwargs['pk'])
+            print(prof)
+            print("==================\n")
+        except:
+            return redirect('user:index')
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
 class PicCreate(CreateView):
     model = Pic #TODO force the upload to go to the logged in user
     fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
