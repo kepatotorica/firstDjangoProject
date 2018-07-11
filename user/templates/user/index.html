@@ -5,15 +5,20 @@
 {{ user }}
 {% if all_users %}
     <ul>
-        {% for friend in all_users %}
+        {% for prof in all_users %}
                 <!--user followed by the colon is our app handle as declared in app.py-->
                 <!--and at the top of urls.py. this is adding the app to the name space-->
                 <!--view_id was made in user/urls.py it is used so we only have to-->
                 <!--update the path once to change everything-->
                 <!--user.id is what the regex is looking for-->
-            <li><a href="{% url 'user:details' friend.id %}">{{ friend }}</a>
-                                                <br>&nbsp&nbsp&nbsp&nbsp id: {{friend.prof.id}}
-                <form action="{% url 'user:details' friend.id %}" method="post" sytle="display: inline">
+            <li><a href="{% url 'user:details' prof.id %}">{{ prof }}</a>
+                <br>&nbsp&nbsp&nbsp&nbsp id: {{prof.id}}
+                {% if prof.profile_picture%}
+                <div style="position: relative; width: 0; height: 0">
+                    <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
+                </div>
+                {% endif %}
+                <form action="{% url 'user:details' prof.id %}" method="post" sytle="display: inline">
                     {% csrf_token %}
                     <!--<input type="hidden" name="user_id" value="{{friend.id}}">-->
                         <!--the user {{ friend }} <br>-->
@@ -24,9 +29,9 @@
                         <!--<span class="glyphicon glyphicon-trash"></span>-->
                     <!--</button>-->
                 </form>
-                <form action="{% url 'user:user-update' friend.id %}" method="post" sytle="display: inline">
+                <form action="{% url 'user:user-update' prof.id %}" method="post" sytle="display: inline">
                     {% csrf_token %}
-                    <input type="hidden" name="user_id" value="{{friend.id}}">
+                    <input type="hidden" name="user_id" value="{{prof.id}}">
                     <!--<button type="submit" class="btn btn-default btn-xs">-->
                         <!--<span class="glyphicon glyphicon-pencil"></span>-->
                     <!--</button>-->
