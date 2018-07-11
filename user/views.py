@@ -13,14 +13,11 @@ from django import forms
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
     context_object_name = 'all_users'
-    print('we are printing in index')
     def get_queryset(self):
-        print('we are printing in index query')
         return User.objects.all()
 
 class DetailView(generic.DetailView):
     model = Prof #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
-    print('we are printing')
     template_name = 'user/details.html'
 
 class PicCreate(CreateView):
@@ -31,8 +28,15 @@ class ProfileUpdate(UpdateView):
     model = Prof
     fields = ['handle', 'bio', 'profile_picture']
 
+    def get(self, request, pk, *args, **kwargs):
+        prof = Prof.objects.get(id=self.kwargs['pk'])
+        print(prof)
+        return redirect('user:index')
+
     def get_form(self, form_class=None):
         form = super(ProfileUpdate, self).get_form(form_class)
+        prof = Prof.objects.get(id=self.kwargs['pk'])
+        # read in the profile from the query key
         form.fields['bio'].required = False
         form.fields['bio'].initial = 'hey'
         return form

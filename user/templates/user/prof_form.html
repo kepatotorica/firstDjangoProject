@@ -3,7 +3,8 @@
 {%block users_active%}active{%endblock%}
 
 {%block body%}
-proc_form
+prof_form
+{% if prof.user.id == user.id %}
     <div class="col-sm-12 col-md-7">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -23,4 +24,7 @@ proc_form
         </div>
     </div>
 </div>
+{% else %}
+    {%include "user/404"%}
+{% endif %}
 {%endblock%}
