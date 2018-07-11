@@ -13,6 +13,7 @@ from django import forms
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
     context_object_name = 'all_users'
+
     def get_queryset(self):
         return User.objects.all()
 
@@ -25,8 +26,7 @@ class DetailView(generic.DetailView):
             self.object = self.get_object()
             print("\n==================")
             print(self.object)
-            prof = Prof.objects.get(id=self.kwargs['pk'])
-            print(prof)
+            # prof = Prof.objects.get(id=self.kwargs['pk'])
             print("==================\n")
         except:
             return redirect('user:index')
@@ -39,7 +39,7 @@ class PicCreate(CreateView):
 
 class ProfileUpdate(UpdateView):
     model = Prof
-    fields = ['handle', 'bio', 'profile_picture']
+    fields = ['privacy_level', 'bio', 'profile_picture']
 
     def get(self, request, pk, *args, **kwargs):
         try:
@@ -104,6 +104,7 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    request.session['user_id'] = user.pk
                     return redirect('user:index')
 
 
@@ -134,10 +135,11 @@ class UserLoginView(View):
 
             #returns the Prof obejects if credintials are correct
             user = authenticate(username=username, password=password)
-
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    request.session['user_id'] = user.pk
+                    request.session['logged_in_user_id'] = user.id
                     return redirect('user:index')
 
 
@@ -147,4 +149,5 @@ class LogoutView(View):
 
      def get(self, request):
         logout(request)
+        request.session.clear()
         return redirect('user:index')

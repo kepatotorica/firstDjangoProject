@@ -2,6 +2,7 @@
 {%block title%}Friendr{%endblock%}
 
 {% block body %}
+{{ user }}
 {% if all_users %}
     <ul>
         {% for friend in all_users %}
