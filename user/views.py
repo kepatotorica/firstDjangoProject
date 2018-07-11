@@ -29,9 +29,13 @@ class ProfileUpdate(UpdateView):
     fields = ['handle', 'bio', 'profile_picture']
 
     def get(self, request, pk, *args, **kwargs):
-        prof = Prof.objects.get(id=self.kwargs['pk'])
-        print(prof)
-        return redirect('user:index')
+        try:
+            prof = Prof.objects.get(id=self.kwargs['pk'])
+            print(prof)
+            return redirect('user:index')
+        except:
+            return redirect('user:index')
+
 
     def get_form(self, form_class=None):
         form = super(ProfileUpdate, self).get_form(form_class)
