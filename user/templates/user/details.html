@@ -1,9 +1,9 @@
 {% extends 'user/base.html' %}
 {% block body %}
-{{ user.username }}<br>
-{{ log_prof.user }}<br>
-{{ prof }}
-{{ view_prof }}<br>
+{{ user.username.printnothing }} <!--never use user anymore, use log_prof.user to access user stuff-->
+{{ log_prof.user.printnothing }}
+{{ prof.printnothing }}
+{{ view_prof.printnothing }}
 <!--<img src="{{ friend.profile_picture.url }}" style="width: 30vw;">-->
 
 
@@ -28,46 +28,43 @@
                 <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
             </div>
         {% endif %}
-<div class="profilePicHome">
-    <div class="form-group">
-
-        {% if prof.user.id == user.id %}
+   {% if prof.user.id == user.id %}
             <form action="{% url 'user:user-update' prof.id %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" name="user_id" value="{{prof.id}}">
-                    <button type="submit" class="btn btn-default btn-s" style="position:relative; left: .7vw">
+                    <button type="submit" class="btn btn-default btn-s" style="position:relative; left: 29vw; top:-1vw;">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
             </form>
         {% endif %}
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2">username:</label>
-        <div class="col-sm-10" >{{ prof.user.username }} </div>
+<div class="profilePicHome">
+    <div class="form-group">
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2">id:</label>
-        <div class="col-sm-10" >{{ prof.user.id }} </div>
+        <label class="profileLabel">username:</label>
+        <label class="profileText">{{ prof.user.username }} </label>
+        <br>
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2"> name:</label>
-        <div class="col-sm-10" >{{ prof.user.first_name }} {{ prof.user.last_name }}</div>
+        <label class="profileLabel">id:</label>
+        <label class="profileText">{{ prof.user.id }} </label>
+        <br>
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2">email:</label>
-        <div class="col-sm-10" >{{ prof.user.email }} </div>
+        <label class="profileLabel"> name:</label>
+        <label class="profileText">{{ prof.user.first_name }} {{ prof.user.last_name }}</label>
+        <br>
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2">bio:</label>
-        <div class="col-sm-10" >{{ prof.bio }} </div>
+        <label class="profileLabel">email:</label>
+        <label class="profileText">{{ prof.user.email }} </label>
+        <br>
 
-        <div class="col-sm-offset-2 col-sm-10"></div>
-        <label class="control-label col-sm-2">privacy_level:</label>
-        <div class="col-sm-10" >{{ prof.privacy_level }} </div>
-
-
+        <label class="profileLabel">bio:</label>
+        <label class="profileText">{{ prof.bio }} </label>
+        <br>
     </div>
 </div>
+
+
+
 <!-- Trigger the modal with a button -->
 <div class="modelButton"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">{{prof.user.username}}'s pictures</button></div>
 
