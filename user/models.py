@@ -12,24 +12,6 @@ class Prof(models.Model):
     bio = models.CharField(max_length=500)
     profile_picture = models.FileField()
 
-    # return str([f.name for f in self.user._meta.get_fields()])
-    # feilds in user include, found using the command above
-    # ['prof',
-    #  'logentry',
-    #  'id',
-    #  'password',
-    #  'last_login',
-    #  'is_superuser',
-    #  'username',
-    #  'first_name',
-    #  'last_name',
-    #  'email',
-    #  'is_staff',
-    #  'is_active',
-    #  'date_joined',
-    #  'groups',
-    # 'user_permissions']
-
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.user.pk})
 
@@ -72,10 +54,14 @@ class Friend(models.Model):
         )
         friend.users.add(new_friend)
 
+    @classmethod
     def removeFriend(cls, current_user, new_friend):
-        friend, created = cls.objects.get_create(
+        friend, created = cls.objects.get_or_create(
             current_user=current_user
         )
+        print("=======")
+        print(new_friend)
+        print(current_user)
         friend.users.remove(new_friend)
 
     # @classmethod

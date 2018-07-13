@@ -161,6 +161,7 @@ def change_friends(request, operations, pk):
     print("======data passed in======")
     print(operations)
     print(pk)
+    print(new_friend)
     if operations == 'add':
         Friend.makeFriend(request.user, new_friend)
     elif operations == 'remove':

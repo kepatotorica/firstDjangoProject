@@ -4,10 +4,11 @@
 {{ log_prof.user.printnothing }}
 {{ prof.printnothing }}
 {{ view_prof.printnothing }}
+{{ log_prof.user.friend_set.all.dontprint }}
 
  {% if prof.profile_picture%}
     <div style="position: relative; width: 0; height: 0">
-        <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
+        <!--<img src="{{ prof.profile_picture.url }}" style="width: 30vw" >-->
     </div>
 {% endif %}
    {% if prof.user.id == user.id %}
@@ -49,7 +50,16 @@
 
 <!-- Trigger the modal with a button -->
 <div class="modelButton"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">{{prof.user.username}}'s pictures</button></div>
+
+
 <div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'add' user.id%}'">Add friend</button></div>
+
+<!--I hate that I solved the problem this way, but what ever, you can't have changing variables in a template, seems kinda dumb to me-->
+{% for user in log_prof.user.friend_set.all %}
+    {% if user.id == prof.id %}
+        <div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'remove' user.id%}'">Remove friend</button></div>
+    {% endif %}
+{% endfor %}
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
