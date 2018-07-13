@@ -1,0 +1,17 @@
+{% extends 'user/base.html' %}
+{%block title%}Friendr{%endblock%}
+
+{% block body %}
+{{ log_prof }}
+
+{% for friend in friendList %}
+    <ul>
+    {% for user in friend.users.all %}
+        <br>{{user.id}}
+        <li><a href="{% url 'user:details' user.id %}">{{ user }}</a>
+                <br>&nbsp&nbsp&nbsp&nbsp id: {{user.id}}
+        </li>
+    {% endfor %}
+    </ul>
+{% endfor %}
+{% endblock %}

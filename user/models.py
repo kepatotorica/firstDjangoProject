@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 # Create your models here.
 class Prof(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -11,8 +12,8 @@ class Prof(models.Model):
     bio = models.CharField(max_length=500)
     profile_picture = models.FileField()
 
-    #return str([f.name for f in self.user._meta.get_fields()])
-    #feilds in user include, found using the command above
+    # return str([f.name for f in self.user._meta.get_fields()])
+    # feilds in user include, found using the command above
     # ['prof',
     #  'logentry',
     #  'id',
@@ -27,13 +28,13 @@ class Prof(models.Model):
     #  'is_active',
     #  'date_joined',
     #  'groups',
-     # 'user_permissions']
+    # 'user_permissions']
 
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.user.pk})
 
     def __str__(self):
-        return "username: " + self.user.username + " email: "\
+        return "username: " + self.user.username + " email: " \
                + self.user.email
 
     @receiver(post_save, sender=User)
@@ -44,6 +45,7 @@ class Prof(models.Model):
     @receiver(post_save, sender=User)
     def save_user_prof(sender, instance, **kwargs):
         instance.prof.save()
+
 
 class Pic(models.Model):
     prof = models.ForeignKey(Prof, on_delete=models.CASCADE)
@@ -57,3 +59,25 @@ class Pic(models.Model):
 
     def get_absolute_url(self):
         return reverse('user:details', kwargs={'pk': self.prof.pk})
+
+
+class Friend(models.Model):
+    users = models.ManyToManyField(User)
+    current_user = models.ForeignKey(User, related_name="owner", on_delete=models.CASCADE, null=True)
+
+    @classmethod
+    def makeFriend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+            current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    def removeFriend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_create(
+            current_user=current_user
+        )
+        friend.users.remove(new_friend)
+
+    # @classmethod
+    # def friendList:
+    #     return Null

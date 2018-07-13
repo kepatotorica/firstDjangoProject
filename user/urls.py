@@ -18,6 +18,8 @@ urlpatterns = [
     re_path(r'^user/add/$', views.PicCreate.as_view(), name='user-post'),
     re_path(r'^user/(?P<pk>[0-9]+)/$', views.ProfileUpdate.as_view(), name='user-update'),
     re_path(r'^user/priv/(?P<pk>[0-9]+)/$', views.PrivProfileUpdate.as_view(), name='priv-user-update'),
-    re_path(r'^user/(?P<pk>[0-9]+)/delete/$', views.FriendDelete.as_view(), name='user-delete'),
+    re_path(r'^user/(?P<pk>[0-9]+)/delete/$', views.userDelete.as_view(), name='user-delete'),
     re_path(r'^user/add/friend/$', views.PicCreate.as_view(), name='pic-add'),
+    re_path(r'^connect/(?P<operations>.*)/(?P<pk>[0-9]+)/$', views.change_friends, name='change_friends'),
+    re_path(r'^friends/$', views.FriendView.as_view(), name='friends'),
 ]

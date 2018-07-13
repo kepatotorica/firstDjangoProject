@@ -4,39 +4,21 @@
 {{ log_prof.user.printnothing }}
 {{ prof.printnothing }}
 {{ view_prof.printnothing }}
-<!--<img src="{{ friend.profile_picture.url }}" style="width: 30vw;">-->
 
-
-    <!--# ['prof',-->
-    <!--#  'logentry',-->
-    <!--#  'id',-->
-    <!--#  'password',-->
-    <!--#  'last_login',-->
-    <!--#  'is_superuser',-->
-    <!--#  'username',-->
-    <!--#  'first_name',-->
-    <!--#  'last_name',-->
-    <!--#  'email',-->
-    <!--#  'is_staff',-->
-    <!--#  'is_active',-->
-    <!--#  'date_joined',-->
-    <!--#  'groups',-->
-     <!--# 'user_permissions']-->
-
-        {% if prof.profile_picture%}
-            <div style="position: relative; width: 0; height: 0">
-                <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
-            </div>
-        {% endif %}
+ {% if prof.profile_picture%}
+    <div style="position: relative; width: 0; height: 0">
+        <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
+    </div>
+{% endif %}
    {% if prof.user.id == user.id %}
-            <form action="{% url 'user:user-update' prof.id %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="user_id" value="{{prof.id}}">
-                    <button type="submit" class="btn btn-default btn-s" style="position:relative; left: 29vw; top:-1vw;">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-            </form>
-        {% endif %}
+       <form action="{% url 'user:user-update' prof.id %}" method="post">
+       {% csrf_token %}
+           <input type="hidden" name="user_id" value="{{prof.id}}">
+               <button type="submit" class="btn btn-default btn-s" style="position:relative; left: 29vw; top:-1vw;">
+                   <span class="glyphicon glyphicon-pencil"></span>
+               </button>
+       </form>
+    {% endif %}
 
 <div class="profilePicHome">
     <div class="form-group">
@@ -67,6 +49,7 @@
 
 <!-- Trigger the modal with a button -->
 <div class="modelButton"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">{{prof.user.username}}'s pictures</button></div>
+<div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'add' user.id%}'">Add friend</button></div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
