@@ -162,11 +162,12 @@ def change_friends(request, operations, pk):
     print(operations)
     print(pk)
     print(new_friend)
+    print(request.user)
     if operations == 'add':
         Friend.makeFriend(request.user, new_friend)
     elif operations == 'remove':
         Friend.removeFriend(request.user, new_friend)
-    return redirect('user:index')
+    return redirect('user:details', new_friend.id)
 
 
 # class friendsView(generic.DetailView):

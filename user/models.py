@@ -59,9 +59,6 @@ class Friend(models.Model):
         friend, created = cls.objects.get_or_create(
             current_user=current_user
         )
-        print("=======")
-        print(new_friend)
-        print(current_user)
         friend.users.remove(new_friend)
 
     # @classmethod
