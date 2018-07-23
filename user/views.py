@@ -170,8 +170,10 @@ def change_friends(request, operations, pk):
     print(request.user)
     if operations == 'add':
         Friend.makeFriend(request.user, new_friend)
+        Friend.makeFriend(new_friend, request.user)
     elif operations == 'remove':
         Friend.removeFriend(request.user, new_friend)
+        Friend.removeFriend(new_friend, request.user)
     return redirect('user:details', new_friend.id)
 
 
