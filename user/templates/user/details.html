@@ -62,19 +62,12 @@ register.filter('update_variable', update_variable)
 <!-- Trigger the modal with a button -->
 <div class="modelButton"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">{{prof.user.username}}'s pictures</button></div>
 
-
+{% if not friends %}
 <div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'add' prof.user.id%}'">Add friend</button></div>
-
+{% else %}
+<div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'remove' prof.user.id%}'">Remove friend</button></div>
+{% endif %}
 <!--it isn't worth the time to try and figure out why this wont work-->
-
-{% for friend in friendList %}
-    {% for user in friend.users.all %}
-        {% if user.id == prof.id %}
-        <!--<br>{{user.id}}&nbsp{{ user }}-->
-        <div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'remove' prof.user.id%}'">Remove friend</button></div>
-        {% endif %}
-    {% endfor %}
-{% endfor %}
 
 
 
@@ -111,7 +104,6 @@ register.filter('update_variable', update_variable)
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
             {% with True as flag %}
-                {{ friends }}
 
             {% for pic in prof.pic_set.all %}
                 <!--if it is 0 no one can see accept for the user-->
@@ -137,7 +129,7 @@ register.filter('update_variable', update_variable)
                 <!--if it is 1 friends and you can see it-->
                 {% elif pic.pic_publicity == "1" %}
 
-                    {% if prof.id == log_prof.id or friends == "True" %}
+                    {% if prof.id == log_prof.id or friends %}
                         {% if flag %}
                             <div class="item active">
                         {% else %}
