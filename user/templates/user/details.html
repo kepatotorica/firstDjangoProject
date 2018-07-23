@@ -111,15 +111,6 @@ register.filter('update_variable', update_variable)
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
             {% with True as flag %}
-            {% with False as friends %}
-                {% for friend in friendList %}
-                    {% for user in friend.users.all%}
-                        {% if user.id == prof.id %}
-                            {% update_variable True as friends %}
-                            {{ friends }}
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
                 {{ friends }}
 
             {% for pic in prof.pic_set.all %}
@@ -186,7 +177,6 @@ register.filter('update_variable', update_variable)
 
 
             {% endfor %}
-            {% endwith %}
             {% endwith %}
             </div>
 

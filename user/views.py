@@ -32,14 +32,19 @@ class DetailView(generic.DetailView):
         except:
             return redirect('user:index')
         context = self.get_context_data(object=self.object)
+        
         if not request.user.is_authenticated:
             return self.render_to_response(context)
         context['friendList'] = Friend.objects.get_or_create(current_user=request.user)
-        # for friend in context['friendList']:
-        #     for user in friend.users.all:
-        #         if user.id == prof.id:
-
-
+        context['friends'] = False
+        print(context['friendList'])
+        loggedIn = Prof.objects.get(id=self.kwargs['pk'])
+        # print(request.user)
+        # print(loggedIn.user)
+        user = loggedIn.user
+        if user.friend_set.filter(current_user=request.user).exists():
+            context['friends'] = True
+        print(context['friends'])
         return self.render_to_response(context)
 
 
