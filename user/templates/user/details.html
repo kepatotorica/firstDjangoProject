@@ -57,25 +57,20 @@
 <div class="modelButton"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">{{prof.user.username}}'s pictures</button></div>
 
 
-<div class="friendButtonAdd"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'add' prof.user.id%}'">Add friend</button></div>
+<div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'add' prof.user.id%}'">Add friend</button></div>
 
 <!--it isn't worth the time to try and figure out why this wont work-->
-<div class="friendButtonRemove"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'remove' prof.user.id%}'">Remove friend</button></div>
 
-
-<!--{{ log_prof.user.friend_set.all }}-->
-<!--{% for userF in log_prof.user.friend_set.all %}-->
-    <!--printed: {{userF.id}}<br>-->
-    <!--{% if userF.id == prof.id %}-->
-    <!--{% endif %}-->
-<!--{% endfor %}-->
-
-<!--I hate that I solved the problem this way, but what ever, you can't have changing variables in a template, seems kinda dumb to me-->
-{% for user in log_prof.user.friend_set.all %}
-    {% if user.id == prof.id %}
-        <!--<div class="friendButton"><button type="button" class="btn btn-default btn-lg">Can't friend yourself</button></div>-->
-    {% endif %}
+{% for friend in friendList %}
+    {% for user in friend.users.all %}
+        {% if user.id == prof.id %}
+        <!--<br>{{user.id}}&nbsp{{ user }}-->
+        <div class="friendButton"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{% url 'user:change_friends' 'remove' prof.user.id%}'">Remove friend</button></div>
+        {% endif %}
+    {% endfor %}
 {% endfor %}
+
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">

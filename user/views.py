@@ -24,12 +24,17 @@ class DetailView(generic.DetailView):
     model = Prof  # the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
     template_name = 'user/details.html'
 
+
     def get(self, request, pk, *args, **kwargs):
         try:
             self.object = self.get_object()
+
         except:
             return redirect('user:index')
         context = self.get_context_data(object=self.object)
+        if not request.user.is_authenticated:
+            return self.render_to_response(context)
+        context['friendList'] = Friend.objects.get_or_create(current_user=request.user)
         return self.render_to_response(context)
 
 
