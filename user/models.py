@@ -5,10 +5,17 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
+PRIVACY_LEVELS = (
+    ('Me', '0'),
+    ('Friends', '1'),
+    ('Everyone', '2'),
+)
+
 # Create your models here.
 class Prof(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    privacy_level = models.CharField(max_length=250)
+    privacy_level = models.CharField(max_length=8, choices=PRIVACY_LEVELS)
     bio = models.CharField(max_length=500)
     profile_picture = models.FileField()
 
