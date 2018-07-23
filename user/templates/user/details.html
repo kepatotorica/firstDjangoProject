@@ -1,4 +1,10 @@
 {% extends 'user/base.html' %}
+
+{% load custom_tags %}
+
+register.filter('update_variable', update_variable)
+
+
 {% block body %}
 {{ user.username.printnothing }} <!--never use user anymore, use log_prof.user to access user stuff-->
 {{ log_prof.user.printnothing }}
@@ -8,7 +14,7 @@
 
  {% if prof.profile_picture%}
     <div style="position: relative; width: 0; height: 0">
-        <!--<img src="{{ prof.profile_picture.url }}" style="width: 30vw" >-->
+        <img src="{{ prof.profile_picture.url }}" style="width: 30vw" >
     </div>
 {% endif %}
    {% if prof.user.id == user.id %}
@@ -88,43 +94,86 @@
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
+                {% with True as flag %}
                 {% for pic in prof.pic_set.all %}
                     {% if not pic.pic_publicity %}
-
                     {% else %}
-                        {% if forloop.counter == 1 %}
+                        {% if flag %}
                             <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
+                        {% update_variable False as flag %}
                         {% else %}
                             <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"></li>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
+                {% endwith %}
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                {% with first=1 %}{% endwith %}
-                <!--figure something out with this later-->
-                {% for pic in prof.pic_set.all %}
-                    {% if not pic.pic_publicity %}
-                    {% else %}
-                    {% if forloop.counter == 1 %}
-                            <div class="item active">
-                        {% else %}
-                            <div class="item">
-                        {% endif %}
-                        <div class="carousel-caption">
+            {% with True as flag %}
+            {% for pic in prof.pic_set.all %}
+                <!--if it is 0 no one can see accept for the user-->
+                {% if pic.pic_publicity == "0" %}
+                            {% if flag %}
+                                <div class="item active">
+                            {% else %}
+                                <div class="item">
+                            {% endif %}
+                            <div class="carousel-caption">
                             <h3>{{ pic.pic_name }}</h3>
-                        </div>
-                        <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+                            </div>
+                            <h3>{{ pic.pic_desc }}</h3>
+                            <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+                            {% if flag %}
+                                </div>
+                                {% update_variable False as flag %}
+                            {% else %}
+                                </div>
+                            {% endif %}
 
-                        {% if forloop.counter == 1 %}
+                <!--if it is 1 just friends can see it-->
+                {% elif pic.pic_publicity == "1" %}
+                            {% if flag %}
+                                <div class="item active">
+                            {% else %}
+                                <div class="item">
+                            {% endif %}
+                            <div class="carousel-caption">
+                            <h3>{{ pic.pic_name }}</h3>
                             </div>
-                        {% else %}
+                            <h3>{{ pic.pic_desc }}</h3>
+                            <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+                            {% if flag %}
+                                </div>
+                                {% update_variable False as flag %}
+                            {% else %}
+                                </div>
+                            {% endif %}
+
+                <!--if it is 2 everyone can see it-->
+                {% elif pic.pic_publicity == "2" %}
+                            {% if flag %}
+                                <div class="item active">
+                            {% else %}
+                                <div class="item">
+                            {% endif %}
+                            <div class="carousel-caption">
+                            <h3>{{ pic.pic_name }}</h3>
                             </div>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
+                            <h3>{{ pic.pic_desc }}</h3>
+                            <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+                            {% if flag %}
+                                </div>
+                                {% update_variable False as flag %}
+                            {% else %}
+                                </div>
+                            {% endif %}
+                {% endif %}
+
+
+            {% endfor %}
+            {% endwith %}
             </div>
 
                 <!-- Left and right controls -->

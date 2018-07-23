@@ -7,15 +7,15 @@ from django.dispatch import receiver
 
 
 PRIVACY_LEVELS = (
-    ('Me', '0'),
-    ('Friends', '1'),
-    ('Everyone', '2'),
+    ('0', 'Just Me'),
+    ('1', 'Friends'),
+    ('2', 'Everyone'),
 )
 
 # Create your models here.
 class Prof(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    privacy_level = models.CharField(max_length=8, choices=PRIVACY_LEVELS)
+    privacy_level = models.CharField(max_length=1, choices=PRIVACY_LEVELS)
     bio = models.CharField(max_length=500)
     profile_picture = models.FileField()
 
@@ -40,7 +40,7 @@ class Pic(models.Model):
     prof = models.ForeignKey(Prof, on_delete=models.CASCADE)
     pic_desc = models.CharField(max_length=10)
     pic_name = models.CharField(max_length=250)
-    pic_publicity = models.BooleanField(default=False)
+    pic_publicity = models.CharField(max_length=1, choices=PRIVACY_LEVELS)
     picture = models.FileField()
 
     def __str__(self):
