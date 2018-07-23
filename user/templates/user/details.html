@@ -97,10 +97,9 @@ register.filter('update_variable', update_variable)
                 {% with True as flag %}
                 {% for pic in prof.pic_set.all %}
                     {% if not pic.pic_publicity %}
-                    {% else %}
                         {% if flag %}
                             <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="active"></li>
-                        {% update_variable False as flag %}
+                            {% update_variable False as flag %}
                         {% else %}
                             <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"></li>
                         {% endif %}
@@ -112,9 +111,21 @@ register.filter('update_variable', update_variable)
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
             {% with True as flag %}
+            {% with False as friends %}
+                {% for friend in friendList %}
+                    {% for user in friend.users.all%}
+                        {% if user.id == prof.id %}
+                            {% update_variable True as friends %}
+                            {{ friends }}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                {{ friends }}
+
             {% for pic in prof.pic_set.all %}
                 <!--if it is 0 no one can see accept for the user-->
                 {% if pic.pic_publicity == "0" %}
+                    {% if prof.id == log_prof.id %}
                             {% if flag %}
                                 <div class="item active">
                             {% else %}
@@ -131,26 +142,28 @@ register.filter('update_variable', update_variable)
                             {% else %}
                                 </div>
                             {% endif %}
-
-                <!--if it is 1 just friends can see it-->
+                    {% endif %}
+                <!--if it is 1 friends and you can see it-->
                 {% elif pic.pic_publicity == "1" %}
-                            {% if flag %}
-                                <div class="item active">
-                            {% else %}
-                                <div class="item">
-                            {% endif %}
-                            <div class="carousel-caption">
-                            <h3>{{ pic.pic_name }}</h3>
-                            </div>
-                            <h3>{{ pic.pic_desc }}</h3>
-                            <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
-                            {% if flag %}
-                                </div>
-                                {% update_variable False as flag %}
-                            {% else %}
-                                </div>
-                            {% endif %}
 
+                    {% if prof.id == log_prof.id or friends == "True" %}
+                        {% if flag %}
+                            <div class="item active">
+                        {% else %}
+                            <div class="item">
+                        {% endif %}
+                        <div class="carousel-caption">
+                        <h3>{{ pic.pic_name }}</h3>
+                        </div>
+                        <h3>{{ pic.pic_desc }}</h3>
+                        <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
+                        {% if flag %}
+                            </div>
+                            {% update_variable False as flag %}
+                        {% else %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 <!--if it is 2 everyone can see it-->
                 {% elif pic.pic_publicity == "2" %}
                             {% if flag %}
@@ -173,6 +186,7 @@ register.filter('update_variable', update_variable)
 
 
             {% endfor %}
+            {% endwith %}
             {% endwith %}
             </div>
 

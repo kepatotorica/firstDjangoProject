@@ -35,6 +35,11 @@ class DetailView(generic.DetailView):
         if not request.user.is_authenticated:
             return self.render_to_response(context)
         context['friendList'] = Friend.objects.get_or_create(current_user=request.user)
+        # for friend in context['friendList']:
+        #     for user in friend.users.all:
+        #         if user.id == prof.id:
+
+
         return self.render_to_response(context)
 
 
