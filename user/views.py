@@ -89,7 +89,7 @@ class ProfileUpdate(UpdateView):
     def get_form(self, form_class=ProfForm):
 
         prof = Prof.objects.get(id=self.kwargs['pk'])
-        form2 = ProfForm() #breaks updating, but allows the filling in of the forms
+        form = ProfForm() #breaks updating, but allows the filling in of the forms
         form.fields['privacy_level'].initial = prof.privacy_level
         form.fields['bio'].initial = prof.bio
         form.fields['profile_picture'].initial = prof.profile_picture
