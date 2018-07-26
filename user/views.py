@@ -6,7 +6,7 @@ from .models import Prof, Pic, Friend
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, TemplateView
-from .forms import UserForm, LoginForm, UserUpdateForm
+from .forms import UserForm, LoginForm, UserUpdateForm, ProfForm
 from django.contrib.auth.models import User
 from django import forms
 from user import models
@@ -53,23 +53,48 @@ class PicCreate(CreateView):
 
 
 class ProfileUpdate(UpdateView):
+    # model = Prof
+    # fields = ['privacy_level', 'bio', 'profile_picture']
     model = Prof
-    fields = ['privacy_level', 'bio', 'profile_picture']
+    form_class = ProfForm
+    template_name = 'user/prof_form.html'
+
+    # def form_valid(self, form):
+    #     user = form.save(commit=True)
+    #     # password = form.cleaned_data['password']
+    #     # print(form)
+    #     self.fields['bio'].required = False
+    #     self.fields['bio'].initial = "sadfasdf"
+    #     # user.set_password(password)
+    #     user.save()
+    #     return redirect('user:index')
 
     def get(self, request, pk, *args, **kwargs):
         try:
             prof = Prof.objects.get(id=self.kwargs['pk'])
             print(prof)
+            print("hello")
             return redirect('user:index')
         except:
             return redirect('user:index')
 
-    def get_form(self, form_class=None):
-        form = super(ProfileUpdate, self).get_form(form_class)
+
+    def get_initial(self):
+        return {
+            'privacy_level': '1',
+            'bio': 'Hi there',
+            'profile_picture': '1',
+            }
+
+    def get_form(self, form_class=ProfForm):
+
         prof = Prof.objects.get(id=self.kwargs['pk'])
-        # read in the profile from the query key
-        form.fields['bio'].required = False
-        form.fields['bio'].initial = 'hey'
+        form2 = ProfForm() #breaks updating, but allows the filling in of the forms
+        form.fields['privacy_level'].initial = prof.privacy_level
+        form.fields['bio'].initial = prof.bio
+        form.fields['profile_picture'].initial = prof.profile_picture
+
+        form = super(ProfileUpdate, self).get_form(form_class) #allows updating but breaks prepropogation
         return form
 
 
@@ -179,10 +204,10 @@ def change_friends(request, operations, pk):
     print(request.user)
     if operations == 'add':
         Friend.makeFriend(request.user, new_friend)
-        Friend.makeFriend(new_friend, request.user)
+        # Friend.makeFriend(new_friend, request.user)
     elif operations == 'remove':
         Friend.removeFriend(request.user, new_friend)
-        Friend.removeFriend(new_friend, request.user)
+        # Friend.removeFriend(new_friend, request.user)
     return redirect('user:details', new_friend.id)
 
 
