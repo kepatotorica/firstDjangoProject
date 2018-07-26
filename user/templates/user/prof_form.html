@@ -3,8 +3,10 @@
 {%block users_active%}active{%endblock%}
 
 {%block body%}
+
+<!--old shit-->
 prof_form
-{% if prof.user.id == user.id %}
+{% if log_prof.user.id == user.id %}
     <div class="col-sm-12 col-md-7">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -15,7 +17,7 @@ prof_form
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <input type="button" class="btn btn-success" value="Edit more" onclick="window.location.href='{% url 'user:priv-user-update' prof.user.id %}'" />
+                            <input type="button" class="btn btn-success" value="Edit more" onclick="window.location.href='{% url 'user:priv-user-update' log_prof.user.id %}'" />
                             <input type="button" class="btn btn-success" value="Cancel" onclick="window.location.href='{% url 'user:details' log_prof.user.id %}'" />
                         </div>
                     </div>
@@ -29,3 +31,14 @@ prof_form
     {%include "user/404"%}
 {% endif %}
 {%endblock%}
+
+
+{{ log_prof.user.id }} <br>
+{{ user.id }}<br>
+ {% if log_prof.user.id == user.id %}
+    {{form.as_p}}
+    <input type="button" class="btn btn-success" value="Edit more" onclick="window.location.href='{% url 'user:priv-user-update' log_prof.user.id %}'" />
+    <input type="button" class="btn btn-success" value="Cancel" onclick="window.location.href='{% url 'user:details' log_prof.user.id %}'" />
+  {% else %}
+    {%include "user/404"%}
+{% endif %}

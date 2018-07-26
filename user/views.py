@@ -24,7 +24,6 @@ class DetailView(generic.DetailView):
     model = Prof  # the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
     template_name = 'user/details.html'
 
-
     def get(self, request, pk, *args, **kwargs):
         try:
             self.object = self.get_object()
@@ -52,50 +51,74 @@ class PicCreate(CreateView):
     fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
 
 
+# class ProfileUpdate(UpdateView):
+#     model = Prof
+#     fields = ['privacy_level', 'bio', 'profile_picture']
+#     # form_class = ProfUpdateForm
+#     template_name = 'user/prof_form.html'
+#
+#     def get(self, request, **kwargs):
+#         # print(self.object)
+#
+#         prof = Prof.objects.get(id=self.kwargs['pk'])
+#         form = ProfUpdateForm(initial={
+#             'privacy_level': prof.privacy_level,
+#             'bio': prof.bio,
+#             'profile_picture': prof.profile_picture,
+#             })
+#
+#         if form.is_valid():
+#
+#             user = form.save(commit=False)
+#
+#             # cleaned (normalized) data
+#             privacy_level = form.cleaned_data['privacy_level']
+#             bio = form.cleaned_data['bio']
+#             profile_picture = form.cleaned_data['profile_picture']
+#             user.save()
+#
+#         return render(request, self.template_name, context={'form': form})
+#
+#     def post(self, request, **kwargs):
+#             # print(self.object)
+#
+#             prof = Prof.objects.get(id=self.kwargs['pk'])
+#             form = ProfUpdateForm(initial={
+#                 'privacy_level': prof.privacy_level,
+#                 'bio': prof.bio,
+#                 'profile_picture': prof.profile_picture,
+#                 })
+#
+#             if form.is_valid():
+#
+#                 user = form.save(commit=False)
+#
+#                 # cleaned (normalized) data
+#                 privacy_level = form.cleaned_data['privacy_level']
+#                 bio = form.cleaned_data['bio']
+#                 profile_picture = form.cleaned_data['profile_picture']
+#                 user.save()
+#
+#             return render(request, self.template_name, context={'form': form})
+
+
 class ProfileUpdate(UpdateView):
-    # model = Prof
-    # fields = ['privacy_level', 'bio', 'profile_picture']
     model = Prof
     form_class = ProfUpdateForm
     template_name = 'user/prof_form.html'
 
-    def form_valid(self, form):
-        prof = form.save(commit=True)
-        bio = form.cleaned_data['bio']
-        prof.bio = bio
-        prof.save()
-        return redirect('user:index')
-    # def get(self, request, pk, *args, **kwargs):
-    #     try:
-    #         prof = Prof.objects.get(id=self.kwargs['pk'])
-    #         print(prof)
-    #         print("hello")
-    #         return redirect('user:index')
-    #     except:
-    #         return redirect('user:index')
-    #
-    # #
-    # # def get_initial(self):
-    # #     return {
-    # #         'privacy_level': '1',
-    # #         'bio': 'Hi there',
-    # #         'profile_picture': '1',
-    # #         }
-    #
-    # def get_form(self, form_class=ProfUpdateForm):
-    #
-    #
-    #     form = super(ProfileUpdate, self).get_form(form_class) #allows updating but breaks prepropogation
-    #     prof = Prof.objects.get(id=self.kwargs['pk'])
-    #
-    #     # form = ProfUpdateForm() #breaks updating, but allows the filling in of the forms
-    #     form.fields['privacy_level'].initial = prof.privacy_level
-    #     form.fields['bio'].required = False
-    #     # form.fields['bio'].initial = prof.bio
-    #     # form.cleaned_data['bio'] = prof.bio
-    #     form.fields['profile_picture'].initial = prof.profile_picture
-    #     return form
-
+    # we may be able to do something about recommendation with a post
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            prof = Prof.objects.get(id=self.kwargs['pk'])
+            form = ProfUpdateForm(initial={
+                'privacy_level': prof.privacy_level,
+                'bio': prof.bio,
+                'profile_picture': prof.profile_picture,
+                })
+            return render(request, self.template_name, context={'form': form})
+        except:
+           return render(request, self.template_name, context={'form': form})
 
 class PrivProfileUpdate(UpdateView):
     model = User
@@ -229,7 +252,6 @@ def change_friends(request, operations, pk):
 class FriendView(TemplateView):
     template_name = "user/friends.html"
 
-
     def get(self, request, *args, **kwargs):
         try:
             self.object = Friend.objects.get_or_create(current_user=request.user)
@@ -238,7 +260,6 @@ class FriendView(TemplateView):
         context = self.get_context_data(object=self.object)
         context['friendList'] = self.object
         return self.render_to_response(context)
-
 
     #
     # def get_context_data(self, **kwargs):

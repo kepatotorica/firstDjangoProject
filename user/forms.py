@@ -26,6 +26,7 @@ class LoginForm(forms.Form):
 
 class ProfUpdateForm(forms.ModelForm):
     bio = forms.CharField(label="Tell me about yourself", widget=forms.TextInput(attrs={"value":"asdf"}))
+    print("hey")
     class Meta:
         model = Prof
         fields = ['privacy_level', 'bio', 'profile_picture']
