@@ -15,24 +15,20 @@ class UserForm(forms.ModelForm):
 #         fields = ('privacy_level', 'bio', 'profile_picture')
 
 
-class ProfForm(forms.ModelForm):
 
-    class Meta:
-        model = Prof
-        fields = ['privacy_level', 'bio', 'profile_picture']
 
-        # def __init__(self, *args, **kwargs):
-        #     print('aye')
-        #     self.request = kwargs.pop('request', None)
-        #
-        #     products = kwargs['instance'].products.all()
-        #
-        #     self.bio = "please"
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     fields = ['username', 'password']
 
+
+
+class ProfUpdateForm(forms.ModelForm):
+    bio = forms.CharField(label="Tell me about yourself", widget=forms.TextInput(attrs={"value":"asdf"}))
+    class Meta:
+        model = Prof
+        fields = ['privacy_level', 'bio', 'profile_picture']
 
 class UserUpdateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

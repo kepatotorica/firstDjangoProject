@@ -16,6 +16,7 @@ prof_form
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
                             <input type="button" class="btn btn-success" value="Edit more" onclick="window.location.href='{% url 'user:priv-user-update' prof.user.id %}'" />
+                            <input type="button" class="btn btn-success" value="Cancel" onclick="window.location.href='{% url 'user:details' log_prof.user.id %}'" />
                         </div>
                     </div>
                 </form>

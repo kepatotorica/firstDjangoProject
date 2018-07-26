@@ -20,6 +20,8 @@ this is the user form<br>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">save</button>
+                             <input type="button" class="btn btn-success" value="Edit less" onclick="window.location.href='{% url 'user:user-update' log_prof.user.id %}'" />
+                             <input type="button" class="btn btn-success" value="Cancel" onclick="window.location.href='{% url 'user:details' log_prof.user.id %}'" />
                         </div>
                     </div>
                 </form>
