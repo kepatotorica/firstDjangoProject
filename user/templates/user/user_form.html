@@ -1,8 +1,13 @@
 {%extends 'user/base.html'%}
 {%block title%}register{%endblock%}
 
+{% load custom_tags %}
+
 {%block body%}
-this is the user form
+this is the user form<br>
+<!--{{ log_prof.user.id }}<br>-->
+<!--{{ user.id }}<br>-->
+{% if log_prof.user.id == user.id %}
 <div class="container-fluid">
 
     <div class="col-sm-12 col-md-7">
@@ -22,4 +27,7 @@ this is the user form
         </div>
     </div>
 </div>
+{% else %}
+    {%include "user/404"%}
+{% endif %}
 {%endblock%}

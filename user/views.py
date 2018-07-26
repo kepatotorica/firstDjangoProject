@@ -59,43 +59,44 @@ class ProfileUpdate(UpdateView):
     form_class = ProfForm
     template_name = 'user/prof_form.html'
 
-    # def form_valid(self, form):
-    #     user = form.save(commit=True)
-    #     # password = form.cleaned_data['password']
-    #     # print(form)
-    #     self.fields['bio'].required = False
-    #     self.fields['bio'].initial = "sadfasdf"
-    #     # user.set_password(password)
-    #     user.save()
-    #     return redirect('user:index')
+    def form_valid(self, form):
+        user = form.save(commit=True)
+        # password = form.cleaned_data['password']
+        # print(form)
+        bio = "auee"
+        form.fields['bio'].required = False
+        form.fields['bio'].initial = "sadfasdf"
+        # user.set_password(password)
+        user.save()
+        return redirect('user:index')
 
-    def get(self, request, pk, *args, **kwargs):
-        try:
-            prof = Prof.objects.get(id=self.kwargs['pk'])
-            print(prof)
-            print("hello")
-            return redirect('user:index')
-        except:
-            return redirect('user:index')
-
-
-    def get_initial(self):
-        return {
-            'privacy_level': '1',
-            'bio': 'Hi there',
-            'profile_picture': '1',
-            }
-
-    def get_form(self, form_class=ProfForm):
-
-        prof = Prof.objects.get(id=self.kwargs['pk'])
-        form = ProfForm() #breaks updating, but allows the filling in of the forms
-        form.fields['privacy_level'].initial = prof.privacy_level
-        form.fields['bio'].initial = prof.bio
-        form.fields['profile_picture'].initial = prof.profile_picture
-
-        form = super(ProfileUpdate, self).get_form(form_class) #allows updating but breaks prepropogation
-        return form
+    # def get(self, request, pk, *args, **kwargs):
+    #     try:
+    #         prof = Prof.objects.get(id=self.kwargs['pk'])
+    #         print(prof)
+    #         print("hello")
+    #         return redirect('user:index')
+    #     except:
+    #         return redirect('user:index')
+    #
+    #
+    # def get_initial(self):
+    #     return {
+    #         'privacy_level': '1',
+    #         'bio': 'Hi there',
+    #         'profile_picture': '1',
+    #         }
+    #
+    # def get_form(self, form_class=ProfForm):
+    #
+    #     prof = Prof.objects.get(id=self.kwargs['pk'])
+    #     form = ProfForm() #breaks updating, but allows the filling in of the forms
+    #     form.fields['privacy_level'].initial = prof.privacy_level
+    #     form.fields['bio'].initial = prof.bio
+    #     form.fields['profile_picture'].initial = prof.profile_picture
+    #
+    #     form = super(ProfileUpdate, self).get_form(form_class) #allows updating but breaks prepropogation
+    #     return form
 
 
 class PrivProfileUpdate(UpdateView):
