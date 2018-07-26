@@ -108,17 +108,17 @@ class ProfileUpdate(UpdateView):
     template_name = 'user/prof_form.html'
 
     # we may be able to do something about recommendation with a post
-    def post(self, request, pk, *args, **kwargs):
-        try:
-            prof = Prof.objects.get(id=self.kwargs['pk'])
-            form = ProfUpdateForm(initial={
-                'privacy_level': prof.privacy_level,
-                'bio': prof.bio,
-                'profile_picture': prof.profile_picture,
-                })
-            return render(request, self.template_name, context={'form': form})
-        except:
-           return render(request, self.template_name, context={'form': form})
+    # def post(self, request, pk, *args, **kwargs):
+    #     try:
+    #         prof = Prof.objects.get(id=self.kwargs['pk'])
+    #         form = ProfUpdateForm(initial={
+    #             'privacy_level': prof.privacy_level,
+    #             'bio': prof.bio,
+    #             'profile_picture': prof.profile_picture,
+    #             })
+    #         return render(request, self.template_name, context={'form': form})
+    #     except:
+    #        return render(request, self.template_name, context={'form': form})
 
 class PrivProfileUpdate(UpdateView):
     model = User
@@ -233,21 +233,6 @@ def change_friends(request, operations, pk):
     return redirect('user:details', new_friend.id)
 
 
-# class friendsView(generic.DetailView):
-#     model = Friend #the template we are using IS THIS RIGHT OR SHOULD IT BE Prof OR User.prof
-#     template_name = 'user/friends.html'
-#
-#     def get(self, request, pk, *args, **kwargs):
-#         try:
-#             self.object = self.get_object()
-#             print("\n==================")
-#             print(self.object)
-#             # prof = Prof.objects.get(id=self.kwargs['pk'])
-#             print("==================\n")
-#         except:
-#             return redirect('user:index')
-#         context = self.get_context_data(object=self.object)
-#         return self.render_to_response(context)
 
 class FriendView(TemplateView):
     template_name = "user/friends.html"
@@ -260,12 +245,3 @@ class FriendView(TemplateView):
         context = self.get_context_data(object=self.object)
         context['friendList'] = self.object
         return self.render_to_response(context)
-
-    #
-    # def get_context_data(self, **kwargs):
-    #     friends = Friend.objects.get_or_create(current_user=User.objects.get(pk=1))
-    #     # print(self.request)
-    #     context = super().get_context_data(**kwargs)
-    #
-    #     context['latest_articles'] = Friend.objects.all()
-    #     return context
