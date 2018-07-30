@@ -20,19 +20,11 @@ pic_form
                     {% render_field form.pic_name class="form-control" placeholder="Name" %}
                     {% render_field form.pic_publicity class="form-control" placeholder="Publicity" selected=log_prof.privacy %}
                     {% render_field form.picture class="form-control" placeholder="picture" value=picture %}
-                    <script>
-                    var ddl = document.getElementById('id_pic_publicity');
-                    var opts = ddl.options.length;
-                    for (var i=0; i<opts; i++){
-                        if (ddl.options[i].value == "1"){
-                            ddl.options[i].selected = true;
-                            break;
-                        }
-                    }
-                    </script>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
+                            <input type="button" name="recommend" class="btn btn-success" value="Recommend">
                         </div>
                     </div>
                 </form>
@@ -40,6 +32,27 @@ pic_form
         </div>
     </div>
 </div>
+
+
+<script>
+
+
+
+document.addEventListener("click", function(){
+    var ddl = document.getElementById('id_pic_publicity');
+    var opts = ddl.options.length;
+    for (var i=0; i<opts; i++){
+        if (ddl.options[i].value == "2"){
+            ddl.options[i].selected = true;
+            break;
+        }
+    }
+});
+
+
+</script>
+
+
 {%endblock%}
 
 
