@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -223,3 +223,11 @@ class FriendView(TemplateView):
         context = self.get_context_data(object=self.object)
         context['friendList'] = self.object
         return self.render_to_response(context)
+
+def processRec(request):
+    if request.method == 'GET':
+        # rec = request.GET['category_id']
+        rec = 2
+    if request.method == 'POST':
+        rec = 1
+    return HttpResponse(1)

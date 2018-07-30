@@ -39,10 +39,10 @@
                         {{ user }}
                     </a>
                     {% else %}
-                       <a href="{% url 'user:login' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
-                        Login
-                    </a>
+                       <!--<a href="{% url 'user:login' %}">-->
+                        <!--<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;-->
+                        <!--Login-->
+                    <!--</a>-->
                     {% endif %}
                 </li>
                 <li class="" >
@@ -61,12 +61,14 @@
                 <!--</div>-->
             <!--</form>-->
              <ul class="nav navbar-nav navbar-right">
+                 {% if user.id %}
                  <li class="" >
                     <a href="{% url 'user:user-post' %}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;
                         Add Post
                     </a>
                 </li>
+                {% endif %}
                 <li class="" >
                     {% if user.is_authenticated %}
                     <a href="{% url 'user:logout' %}">
