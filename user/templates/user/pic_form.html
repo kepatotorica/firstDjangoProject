@@ -1,6 +1,7 @@
 {%extends 'user/base.html'%}
 {%block title%}Add a New Picture{%endblock%}
 {%block users_active%}active{%endblock%}
+{% load widget_tweaks %}
 
 {%block body%}
 pic_form
@@ -11,7 +12,19 @@ pic_form
 
                 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% include 'user/form-template.html' %}
+                    {{log_prof.privacy_level}}
+                    <!--<div class="hidDiv">-->
+                    {% render_field form.prof class="form-control" placeholder="USER" selected=log_prof %}
+                    <!--</div>-->
+                    {% render_field form.pic_desc class="form-control" placeholder="Description" %}
+                    {% render_field form.pic_name class="form-control" placeholder="Name" %}
+                    {% render_field form.pic_publicity class="form-control" placeholder="Publicity" selected=log_prof.privacy %}
+                    {% render_field form.picture class="form-control" placeholder="picture" value=picture %}
+                        <!--prof = models.ForeignKey(Prof, on_delete=models.CASCADE)-->
+                        <!--pic_desc = models.CharField(max_length=10)-->
+                        <!--pic_name = models.CharField(max_length=250)-->
+                        <!--pic_publicity = models.CharField(max_length=1, choices=PRIVACY_LEVELS)-->
+                        <!--picture = models.FileField()-->
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
@@ -23,3 +36,6 @@ pic_form
     </div>
 </div>
 {%endblock%}
+
+
+<!--{% include 'user/form-template.html' %}-->

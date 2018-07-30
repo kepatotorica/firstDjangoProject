@@ -39,4 +39,11 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email', 'password', 'first_name', 'last_name']
 
 
-# class picUpload
+# class BazForm(models.ModelForm):
+#     model = Baz
+#     fields = ['bar', ...]
+#
+#     def __init__(self, *args, **kwargs):
+#         foo_id = kwargs.pop('foo_id')
+#         super(BazForm, self).__init__(*args, **kwargs)
+#         self.fields['bar'].queryset = Bar.objects.filter(foo_id=foo_id)

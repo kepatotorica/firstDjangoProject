@@ -51,57 +51,6 @@ class PicCreate(CreateView):
     fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
 
 
-# class ProfileUpdate(UpdateView):
-#     model = Prof
-#     fields = ['privacy_level', 'bio', 'profile_picture']
-#     # form_class = ProfUpdateForm
-#     template_name = 'user/prof_form.html'
-#
-#     def get(self, request, **kwargs):
-#         # print(self.object)
-#
-#         prof = Prof.objects.get(id=self.kwargs['pk'])
-#         form = ProfUpdateForm(initial={
-#             'privacy_level': prof.privacy_level,
-#             'bio': prof.bio,
-#             'profile_picture': prof.profile_picture,
-#             })
-#
-#         if form.is_valid():
-#
-#             user = form.save(commit=False)
-#
-#             # cleaned (normalized) data
-#             privacy_level = form.cleaned_data['privacy_level']
-#             bio = form.cleaned_data['bio']
-#             profile_picture = form.cleaned_data['profile_picture']
-#             user.save()
-#
-#         return render(request, self.template_name, context={'form': form})
-#
-#     def post(self, request, **kwargs):
-#             # print(self.object)
-#
-#             prof = Prof.objects.get(id=self.kwargs['pk'])
-#             form = ProfUpdateForm(initial={
-#                 'privacy_level': prof.privacy_level,
-#                 'bio': prof.bio,
-#                 'profile_picture': prof.profile_picture,
-#                 })
-#
-#             if form.is_valid():
-#
-#                 user = form.save(commit=False)
-#
-#                 # cleaned (normalized) data
-#                 privacy_level = form.cleaned_data['privacy_level']
-#                 bio = form.cleaned_data['bio']
-#                 profile_picture = form.cleaned_data['profile_picture']
-#                 user.save()
-#
-#             return render(request, self.template_name, context={'form': form})
-
-
 class ProfileUpdate(UpdateView):
     model = Prof
     form_class = ProfUpdateForm
