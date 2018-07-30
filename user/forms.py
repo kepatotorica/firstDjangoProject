@@ -43,9 +43,3 @@ class PicForm(forms.ModelForm):
     class Meta:
         model = Pic
         fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
-#
-#     def __init__(self, request, *args, **kwargs):
-#         print(request.session['user_id'])
-#         foo_id = kwargs.pop('foo_id')
-#         super(PicForm, self).__init__(*args, **kwargs)
-#         self.fields['bar'].queryset = Prof.objects.filter(pk=context_processors.log_prof.user.id)
