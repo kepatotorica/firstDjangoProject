@@ -22,4 +22,5 @@ urlpatterns = [
     re_path(r'^user/add/friend/$', views.PicCreate.as_view(), name='pic-add'),
     re_path(r'^connect/(?P<operations>.*)/(?P<pk>[0-9]+)/$', views.change_friends, name='change_friends'),
     re_path(r'^friends/$', views.FriendView.as_view(), name='friends'),
+    re_path(r'^processRec/$', views.processRec, name='processRec'),
 ]

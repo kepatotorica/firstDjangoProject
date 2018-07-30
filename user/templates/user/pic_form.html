@@ -24,7 +24,7 @@ pic_form
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <input type="button" name="recommend" class="btn btn-success" value="Recommend">
+                            <input type="button" name="recommend" class="btn btn-success" value="Recommend" onclick="recFunc()">
                         </div>
                     </div>
                 </form>
@@ -36,23 +36,28 @@ pic_form
 
 <script>
 
+function recFunc() {
+    var debug = document.getElementById('id_pic_name');
+    $.ajax({
+        url: '/../../processRec/',
+        data: {
+          'user_preference': 1
+        },
+        dataType: 'json',
+        success: function (data) {
+            recValue = data.rec;
+            var ddl = document.getElementById('id_pic_publicity');
+            var opts = ddl.options.length;
+            for (var i=0; i<opts; i++){
+                if (ddl.options[i].value == String(recValue)){
+                    ddl.options[i].selected = true;
+                    break;
+                }
+            }
+        }
+      });
+};
 
-
-document.addEventListener("click", function(){
- $.ajax({
-      type:'get',
-      url:'/URLToTriggerGetRequestHandler',
-      cache:false,
-      async:'asynchronous',
-      dataType:'json',
-      success: function(data) {
-        console.log(JSON.stringify(data))
-      },
-      error: function(request, status, error) {
-        console.log("Error: " + error)
-      }
-   });
-});
 
 
 </script>
@@ -60,7 +65,8 @@ document.addEventListener("click", function(){
 
 {%endblock%}
 
-
+document.getElementById("recButton").onclick = function() {}
+document.addEventListener("click", function(){});
 <!--below is how to change the selected-->
 
     <!--var ddl = document.getElementById('id_pic_publicity');-->
