@@ -20,11 +20,16 @@ pic_form
                     {% render_field form.pic_name class="form-control" placeholder="Name" %}
                     {% render_field form.pic_publicity class="form-control" placeholder="Publicity" selected=log_prof.privacy %}
                     {% render_field form.picture class="form-control" placeholder="picture" value=picture %}
-                        <!--prof = models.ForeignKey(Prof, on_delete=models.CASCADE)-->
-                        <!--pic_desc = models.CharField(max_length=10)-->
-                        <!--pic_name = models.CharField(max_length=250)-->
-                        <!--pic_publicity = models.CharField(max_length=1, choices=PRIVACY_LEVELS)-->
-                        <!--picture = models.FileField()-->
+                    <script>
+                    var ddl = document.getElementById('id_pic_publicity');
+                    var opts = ddl.options.length;
+                    for (var i=0; i<opts; i++){
+                        if (ddl.options[i].value == "1"){
+                            ddl.options[i].selected = true;
+                            break;
+                        }
+                    }
+                    </script>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-success">Submit</button>
