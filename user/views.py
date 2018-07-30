@@ -60,24 +60,18 @@ class PicCreate(CreateView):
     form_class = PicForm
     template_name = 'user/pic_form.html'
 
-    def post(self, request, *args, **kwargs):
-        try:
-            form = PicForm(initial={
-                'prof': request.log_prof,
-                'pic_publicity': request.log_prof.privacy_level,
-                })
-            print(request.log_prof)
-            return render(request, self.template_name, context={'form': form})
-        except:
-           return render(request, self.template_name, context={'form': form})
 
     def get(self, request, *args, **kwargs):
         form = PicForm()
         try:
             prof = Prof.objects.get(id=request.session['user_id'])
+            if prof.privacy_level:
+                priv = '0'
+            else:
+                priv = prof.privacy_level
             form = PicForm(initial={
                 'prof': prof,
-                'pic_publicity': prof.privacy_level,
+                'pic_publicity': priv,
                 })
             print(request.log_prof)
             return render(request, self.template_name, context={'form': form})
@@ -152,7 +146,7 @@ class UserFormView(View):
                 if user.is_active:
                     login(request, user)
                     request.session['user_id'] = user.pk
-                    return redirect('user:index')
+                    return redirect('user:user-update', str(user.id))
 
         return render(request, self.template_name, {'form': form})
 
@@ -186,7 +180,7 @@ class UserLoginView(View):
                     login(request, user)
                     request.session['user_id'] = user.pk
                     request.session['logged_in_user_id'] = user.id
-                    return redirect('user:index')
+                    return redirect('user:details', str(user.id))
 
         return render(request, self.template_name, {'form': form})
 
