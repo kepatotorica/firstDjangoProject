@@ -39,14 +39,19 @@ pic_form
 
 
 document.addEventListener("click", function(){
-    var ddl = document.getElementById('id_pic_publicity');
-    var opts = ddl.options.length;
-    for (var i=0; i<opts; i++){
-        if (ddl.options[i].value == "2"){
-            ddl.options[i].selected = true;
-            break;
-        }
-    }
+ $.ajax({
+      type:'get',
+      url:'/URLToTriggerGetRequestHandler',
+      cache:false,
+      async:'asynchronous',
+      dataType:'json',
+      success: function(data) {
+        console.log(JSON.stringify(data))
+      },
+      error: function(request, status, error) {
+        console.log("Error: " + error)
+      }
+   });
 });
 
 
@@ -54,6 +59,18 @@ document.addEventListener("click", function(){
 
 
 {%endblock%}
+
+
+<!--below is how to change the selected-->
+
+    <!--var ddl = document.getElementById('id_pic_publicity');-->
+    <!--var opts = ddl.options.length;-->
+    <!--for (var i=0; i<opts; i++){-->
+        <!--if (ddl.options[i].value == "2"){-->
+            <!--ddl.options[i].selected = true;-->
+            <!--break;-->
+        <!--}-->
+    <!--}-->
 
 
 <!--{% include 'user/form-template.html' %}-->
