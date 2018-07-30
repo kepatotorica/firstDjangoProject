@@ -13,9 +13,9 @@ pic_form
                 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{log_prof.privacy_level}}
-                    <!--<div class="hidDiv">-->
+                    <div class="hidDiv">
                     {% render_field form.prof class="form-control"%}
-                    <!--</div>-->
+                    </div>
                     {% render_field form.pic_desc class="form-control" placeholder="Description" %}
                     {% render_field form.pic_name class="form-control" placeholder="Name" %}
                     {% render_field form.pic_publicity class="form-control" placeholder="Publicity" selected=log_prof.privacy %}
