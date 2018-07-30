@@ -1,0 +1,31 @@
+{%extends 'user/base.html'%}
+{%block title%}Delete Account{%endblock%}
+{%block users_active%}active{%endblock%}
+
+{%block body%}
+
+<!--old shit-->
+{% if log_prof.user.id == user.id %}
+    <div class="col-sm-12 col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    Are you sure you want to delete your account?
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Yes</button>
+                            <input type="button" class="btn btn-success" value="No" onclick="window.location.href='{% url 'user:details' log_prof.user.id %}'" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    {%include "user/404"%}
+{% endif %}
+{%endblock%}

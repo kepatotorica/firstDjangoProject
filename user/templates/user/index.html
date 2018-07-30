@@ -9,6 +9,7 @@
 {% if all_users %}
     <ul>
         {% for user in all_users %}
+            {% if user.prof %}
             <li><a href="{% url 'user:details' user.id %}">{{ user }}</a>
                 <br>&nbsp&nbsp&nbsp&nbsp id: {{user.id}}
                 {% if user.prof.profile_picture%}
@@ -16,6 +17,7 @@
                         <img src="{{ user.prof.profile_picture.url }}" style="width: 30vw" >
                     </div>
                 {% endif %}
+            {% endif %}
         {% endfor %}
     </ul>
 {% else %}
