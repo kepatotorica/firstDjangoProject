@@ -6,7 +6,7 @@ from .models import Prof, Pic, Friend
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, TemplateView
-from .forms import UserForm, LoginForm, UserUpdateForm, ProfUpdateForm
+from .forms import UserForm, LoginForm, UserUpdateForm, ProfUpdateForm, PicForm
 from django.contrib.auth.models import User
 from django import forms
 from user import models
@@ -46,9 +46,44 @@ class DetailView(generic.DetailView):
         return self.render_to_response(context)
 
 
+# class PicCreate(CreateView):
+#     form_class = PicForm
+#     model = Pic
+#
+#     def get_form_kwargs(self):
+#         kwargs = super(PicCreate, self).get_form_kwargs()
+#         # kwargs.update({'pk': self.kwargs.get('pk')})
+#         return kwargs
+
 class PicCreate(CreateView):
     model = Pic  # TODO force the upload to go to the logged in user
-    fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
+    form_class = PicForm
+    template_name = 'user/pic_form.html'
+
+    def post(self, request, *args, **kwargs):
+        try:
+            form = PicForm(initial={
+                'prof': request.log_prof,
+                'pic_publicity': request.log_prof.privacy_level,
+                })
+            print(request.log_prof)
+            return render(request, self.template_name, context={'form': form})
+        except:
+           return render(request, self.template_name, context={'form': form})
+
+    def get(self, request, *args, **kwargs):
+        form = PicForm()
+        try:
+            prof = Prof.objects.get(id=request.session['user_id'])
+            form = PicForm(initial={
+                'prof': prof,
+                'pic_publicity': prof.privacy_level,
+                })
+            print(request.log_prof)
+            return render(request, self.template_name, context={'form': form})
+        except:
+           return render(request, self.template_name, context={'form': form})
+    # fields = ['prof', 'pic_desc', 'pic_name', 'pic_publicity', 'picture']
 
 
 class ProfileUpdate(UpdateView):
