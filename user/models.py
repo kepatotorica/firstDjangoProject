@@ -38,7 +38,7 @@ class Prof(models.Model):
 
 class Pic(models.Model):
     prof = models.ForeignKey(Prof, on_delete=models.CASCADE)
-    pic_desc = models.CharField(max_length=10)
+    pic_desc = models.CharField(max_length=250)
     pic_name = models.CharField(max_length=250)
     pic_publicity = models.CharField(max_length=1, choices=PRIVACY_LEVELS)
     picture = models.FileField()

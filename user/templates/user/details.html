@@ -80,11 +80,11 @@ register.filter('update_variable', update_variable)
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">pictures for {{ prof.privacy_level }}</h4>
+        <h4 class="modal-title">pictures for {{ prof.user.first_name }}</h4>
       </div>
 
       <div class="modal-body">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel"  data-interval="0">
             <!-- Indicators -->
             <ol class="carousel-indicators">
                 {% with True as flag %}
@@ -117,7 +117,7 @@ register.filter('update_variable', update_variable)
                             <div class="carousel-caption">
                             <h3>{{ pic.pic_name }}</h3>
                             </div>
-                            <h3>{{ pic.pic_desc }}</h3>
+                            <!--<h3>{{ pic.pic_desc }}</h3>-->
                             <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
                             {% if flag %}
                                 </div>
@@ -138,7 +138,7 @@ register.filter('update_variable', update_variable)
                         <div class="carousel-caption">
                         <h3>{{ pic.pic_name }}</h3>
                         </div>
-                        <h3>{{ pic.pic_desc }}</h3>
+                        <!--<h3>{{ pic.pic_desc }}</h3>-->
                         <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
                         {% if flag %}
                             </div>
@@ -157,7 +157,7 @@ register.filter('update_variable', update_variable)
                             <div class="carousel-caption">
                             <h3>{{ pic.pic_name }}</h3>
                             </div>
-                            <h3>{{ pic.pic_desc }}</h3>
+                            <!--<h3>{{ pic.pic_desc }}</h3>-->
                             <img src="{{ pic.picture.url }}" alt="Image" style="width:100%; display: block; margin-left: auto; margin-right: auto;">
                             {% if flag %}
                                 </div>

@@ -1,9 +1,9 @@
-{%extends 'user/base.html'%}
-{%block title%}Add a New Picture{%endblock%}
-{%block users_active%}active{%endblock%}
+{% extends 'user/base.html' %}
+{% block title %}Add a New Picture{% endblock %}
+{% block users_active %}active{% endblock %}
 {% load widget_tweaks %}
 
-{%block body%}
+{% block body %}
 pic_form
 <div class="container-fluid">
     <div class="col-sm-12 col-md-7">
@@ -12,9 +12,8 @@ pic_form
 
                 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{log_prof.privacy_level}}
                     <div class="hidDiv">
-                    {% render_field form.prof class="form-control"%}
+                    {% render_field form.prof class="form-control" %}
                     </div>
                     {% render_field form.pic_desc class="form-control" placeholder="Description" %}
                     {% render_field form.pic_name class="form-control" placeholder="Name" %}
@@ -38,10 +37,15 @@ pic_form
 
 function recFunc() {
     var debug = document.getElementById('id_pic_name');
+    var pic_prev = document.getElementById('id_pic_publicity').value //this is an example of how to get data from the text field into the parsing
     $.ajax({
         url: '/../../processRec/',
         data: {
-          'user_preference': 1
+          'user_preference': {{log_prof.privacy_level}},
+          'sentiment': 1,
+          'sensitivity': 2,
+          'relationship': 3,
+          'fieldData': pic_prev
         },
         dataType: 'json',
         success: function (data) {
@@ -63,7 +67,7 @@ function recFunc() {
 </script>
 
 
-{%endblock%}
+{% endblock %}
 
 document.getElementById("recButton").onclick = function() {}
 document.addEventListener("click", function(){});

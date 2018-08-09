@@ -226,11 +226,40 @@ class FriendView(TemplateView):
 
 def processRec(request):
     user_preference = request.GET.get('user_preference', None)
+    sentiment = request.GET.get('sentiment', None)
+    sensitivity = request.GET.get('sensitivity', None)
+    relationship = request.GET.get('relationship', None)
+    fieldData = request.GET.get('fieldData', None)
     print(request.GET)
-    print(user_preference)
+
+    print("user pref: " + user_preference)
+    print("sentiment: " + sentiment)
+    print("sensitivity: " + sensitivity)
+    print("relationship: " + relationship)
+    print("fieldData: " + fieldData)
 
     finalRec = user_preference;
     data = {
-        'rec': user_preference
+        'rec': finalRec
     }
     return JsonResponse(data)
+
+
+
+
+#     what is the problem we want to solve
+#
+# the technical aspeccts of the website, and the backround rec
+#
+# where we will go from here, the plan to finish it up
+# 	-aka automatically parsing meaning from a picture
+#
+# layout an evaluation plan
+# 	-aka diffrernt recomendation plans
+# 	-how will we evaluate the tool
+# 	-what would be the logistical challanges for the study
+# 	-what will we measure
+# 	-what hypothisis do we have
+# 	-this is based on if it is completed
+# 	-how will the tool enable research
+#
