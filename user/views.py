@@ -11,6 +11,24 @@ from django.contrib.auth.models import User
 from django import forms
 from user import models
 
+# numpy, pandas, sklearn
+import numpy as np
+import pandas as pd
+# importing train_test_split
+from sklearn.model_selection import train_test_split
+# import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier
+# import confusion_matrix
+from sklearn.metrics import confusion_matrix
+# import GridSearchCV
+from sklearn.model_selection import GridSearchCV
+# import classification_reportD
+from sklearn.metrics import classification_report
+# import classification_report
+from sklearn.metrics import classification_report
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+
 
 class IndexView(generic.ListView):
     template_name = 'user/index.html'
@@ -238,13 +256,99 @@ def processRec(request):
     print("relationship: " + relationship)
     print("fieldData: " + fieldData)
 
-    finalRec = user_preference;
+    ######## start of recommender system
+
+    # Load the dataset
+    # /../../processRec/
+    # df = pd.read_csv('/../../more_processed_policy_selections.csv/')
+    df = pd.read_csv('/Users/devankarsann/Desktop/helpingKepa2/firstDjangoProject/user/more_processed_policy_selections.csv')
+
+    X = df.drop('Policy',axis=1).values
+    y = df['Policy'].values
+
+    # X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.4,random_state=42, stratify=y)
+
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.01, random_state=42)
+
+    # Setup arrays to store training and test accuracies
+    neighbors = np.arange(1,9)
+    train_accuracy = np.empty(len(neighbors))
+    test_accuracy = np.empty(len(neighbors))
+
+    for i,k in enumerate(neighbors):
+        # Setup a knn classifier with k neighbors
+        knn = KNeighborsClassifier(n_neighbors=k)
+
+        # Fit the model
+        knn.fit(X_train, y_train)
+
+        # Compute accuracy on the training set
+        train_accuracy[i] = knn.score(X_train, y_train)
+
+        # Compute accuracy on the test set
+        test_accuracy[i] = knn.score(X_test, y_test)
+
+
+    # Setup a knn classifier with k neighbors
+    knn = KNeighborsClassifier(n_neighbors=7)
+
+    # Fit the model
+    knn.fit(X_train,y_train)
+
+    # Get accuracy. Note: In case of classification algorithms score method represents accuracy.
+    knn.score(X_test,y_test)
+
+    # let us get the predictions using the classifier we had fit above
+    # y_pred = knn.predict(X_test)
+    # print(y_pred)
+    # print(y_pred[0])
+
+    # recommender system
+    # 1 is everyone
+    # 2 is friends
+    # 3 is nobody
+
+    # website
+    # 0 is me
+    # 1 is friends
+    # 2 is everyone
+
+    if relationship == 0:
+        relationship = 3
+    elif relationship == 1:
+        relationship = 2
+    else:
+        relationship = 1
+
+    test_input = [[sensitivity, sentiment, relationship]]
+    test_input_pred = knn.predict(test_input)
+    # print(test_input_pred)
+    print('recommendation generated: ' + test_input_pred[0])
+
+    '''
+    PRIVACY_LEVELS = (
+        ('0', 'Just Me'), = c
+        ('1', 'Friends'), = b
+        ('2', 'Everyone'), = a
+    )
+    '''
+
+    ######## end of recommender system
+
+    # finalRec = user_preference;
+    finalRec = test_input_pred[0]
+
+    if finalRec == 'a':
+        finalRec = 2
+    elif finalRec == 'b':
+        finalRec = 1
+    else: # 'c'
+        finalRec = 0
+
     data = {
         'rec': finalRec
     }
     return JsonResponse(data)
-
-
 
 
 #     what is the problem we want to solve
